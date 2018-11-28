@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apsolutna devijacija", "apsolutna devijacija\apsolutna devijacija.vcxproj", "{177EFDC5-02D9-441A-B10B-F5AC896B4DDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{177EFDC5-02D9-441A-B10B-F5AC896B4DDC}.Debug|x64.ActiveCfg = Debug|x64
+		{177EFDC5-02D9-441A-B10B-F5AC896B4DDC}.Debug|x64.Build.0 = Debug|x64
+		{177EFDC5-02D9-441A-B10B-F5AC896B4DDC}.Debug|x86.ActiveCfg = Debug|Win32
+		{177EFDC5-02D9-441A-B10B-F5AC896B4DDC}.Debug|x86.Build.0 = Debug|Win32
+		{177EFDC5-02D9-441A-B10B-F5AC896B4DDC}.Release|x64.ActiveCfg = Release|x64
+		{177EFDC5-02D9-441A-B10B-F5AC896B4DDC}.Release|x64.Build.0 = Release|x64
+		{177EFDC5-02D9-441A-B10B-F5AC896B4DDC}.Release|x86.ActiveCfg = Release|Win32
+		{177EFDC5-02D9-441A-B10B-F5AC896B4DDC}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5894C8C3-8BD3-440B-8725-01A4F59041CF}
+	EndGlobalSection
+EndGlobal
