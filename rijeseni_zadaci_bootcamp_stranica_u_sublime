@@ -1,0 +1,119 @@
+POrez
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+int main () {
+    int N = 0;
+    int P = 0;
+    std::cin >> N >> K;
+    if(P >= 0 && P <= 100)
+        std::cout << N * P / 100;
+    return 0;
+}
+
+
+
+
+kasnjenje
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+int main() {
+	int hh = 0;
+	int mm = 0;
+	char znak = ':';
+	std::cin >> hh >> znak >> mm;
+	if (hh >= 8 && hh < 24 && mm > 0 && znak == ':') {
+		int a = hh - 8;
+		std::cout << a * 60 + mm;
+	}
+	return 0;
+}
+
+
+zadatak 1 igra sekcija 2 
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+int main() {
+	int N = 0;
+	std::cin >> N;
+	int x1 = N / 1000;
+	int x2 = (N - (x1 * 1000)) / 100;
+	int x3 = (N - (x1 * 1000) - (x2 * 100)) / 10;
+	int x4 = (N - (x1 * 1000) - (x2 * 100) - (x3 * 10)) / 1;
+	if (x1 != 9) {
+		x1++;
+	}
+	else if (x1 == 9) {
+		if (x2 != 9) {
+			x2++;
+		}
+		else if (x2 == 9) {
+			if (x3 != 9) {
+				x3++;
+			}
+			else if (x3 == 9) {
+				if (x4 != 9) {
+					x4++;
+				}
+				if (x4 == 9) {
+				}
+			}
+		}
+	}
+	N = x1 * 1000 + x2 * 100 + x3 * 10 + x4;
+	std::cout << "\n" << N;
+	return 0;
+}
+
+
+
+miller 
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <cmath>
+int main() {
+	float S = 0, A = 0;
+	std::cin >> S >> A;
+	S = S * 1.8 + 32;
+	std::cout << std::fixed << std::setprecision(1) << abs(S - A);
+}
+
+
+zadatak IGRA sa while
+
+#include <iostream>
+
+int main (){
+    int N = 0 , x = 0;
+    std::cin >> N;
+	
+    while(N<9000 && x == 0){
+        N += 1000;
+        x++;
+    }
+    while(N<9900 && x == 0){
+        N += 100;
+        x++;
+    }
+    while(N<9990 && x == 0){
+        N += 10;
+        x++;
+    }
+    while(N<9999 && x == 0){
+        N +=1;
+        x++;
+    }
+    
+    std::cout << N;
+}
+
+
+
+
