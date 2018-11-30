@@ -1,0 +1,310 @@
+POrez
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+int main () {
+    int N = 0;
+    int P = 0;
+    std::cin >> N >> K;
+    if(P >= 0 && P <= 100)
+        std::cout << N * P / 100;
+    return 0;
+}
+
+
+
+
+kasnjenje
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+int main() {
+	int hh = 0;
+	int mm = 0;
+	char znak = ':';
+	std::cin >> hh >> znak >> mm;
+	if (hh >= 8 && hh < 24 && mm > 0 && znak == ':') {
+		int a = hh - 8;
+		std::cout << a * 60 + mm;
+	}
+	return 0;
+}
+
+
+zadatak 1 igra sekcija 2 
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+int main() {
+	int N = 0;
+	std::cin >> N;
+	int x1 = N / 1000;
+	int x2 = (N - (x1 * 1000)) / 100;
+	int x3 = (N - (x1 * 1000) - (x2 * 100)) / 10;
+	int x4 = (N - (x1 * 1000) - (x2 * 100) - (x3 * 10)) / 1;
+	if (x1 != 9) {
+		x1++;
+	}
+	else if (x1 == 9) {
+		if (x2 != 9) {
+			x2++;
+		}
+		else if (x2 == 9) {
+			if (x3 != 9) {
+				x3++;
+			}
+			else if (x3 == 9) {
+				if (x4 != 9) {
+					x4++;
+				}
+				if (x4 == 9) {
+				}
+			}
+		}
+	}
+	N = x1 * 1000 + x2 * 100 + x3 * 10 + x4;
+	std::cout << "\n" << N;
+	return 0;
+}
+
+
+
+miller 
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <cmath>
+int main() {
+	float S = 0, A = 0;
+	std::cin >> S >> A;
+	S = S * 1.8 + 32;
+	std::cout << std::fixed << std::setprecision(1) << abs(S - A);
+}
+
+
+zadatak IGRA sa while
+
+#include <iostream>
+
+int main (){
+    int N = 0 , x = 0;
+    std::cin >> N;
+	
+    while(N<9000 && x == 0){
+        N += 1000;
+        x++;
+    }
+    while(N<9900 && x == 0){
+        N += 100;
+        x++;
+    }
+    while(N<9990 && x == 0){
+        N += 10;
+        x++;
+    }
+    while(N<9999 && x == 0){
+        N +=1;
+        x++;
+    }
+    
+    std::cout << N;
+}
+
+
+lubenica sa while 
+
+#include <iostream>
+
+int main (){
+    int W = 0, x = 0;
+    std::cin >> W;
+    while(W%2 == 0 && W != 2 && x == 0){
+        x++;
+        std::cout << "DA";
+    }
+    while((W%2 != 0 || W == 2) && x == 0){
+        x++;
+        std::cout << "NE";
+    }
+}
+
+
+
+---------------------------------------------------------
+zadatak: prosjek ocijena 
+
+#include <iostream>
+
+int main() {
+	float broj_unosa = 0;
+	float unosi = 0;
+	float counter = 0;
+	for (int i = 0; i < 1;) {
+		std::cin >> unosi;
+		if (unosi == 0) {
+			i++;
+			break;
+		}
+		counter += unosi;
+		broj_unosa++;
+	}
+	counter = counter / broj_unosa;
+	std::cout << counter;
+}
+
+
+-----------------------------------------------------------
+zadatak umnozak niza 
+
+#include <iostream>
+
+int main() {
+	float broj_unosa = 0;
+	float unosi = 0;
+	float counter = 1;
+	std::cin >> broj_unosa;
+	for (int i = 0; i < broj_unosa; i++) {
+		std::cin >> unosi;
+		counter = counter * unosi;
+	}
+	std::cout << counter;
+}
+
+
+------------------------------------------------------------
+zadatak kockice 
+
+#include <iostream>
+#include <string>
+
+int main() {
+	int mirko = 0, slavko = 0;
+	std::cin >>mirko>>slavko;
+	int x = 0, y = 0, z = 0;
+	while(mirko == 1 && x == 0){
+	    mirko = 6;
+	    x++;
+	}
+	while(mirko == 2 && x == 0){
+	    mirko =5 ;
+	    x++;
+	}
+	while(mirko == 3 && x == 0){
+	    mirko =4;
+	    x++;
+	}
+	while(slavko == 1 && y == 0){
+	    slavko = 6;
+	    y++;
+	}
+	while(slavko == 2 && y == 0){
+	    slavko =5 ;
+	    y++;
+	}
+	while(slavko == 3 && y == 0){
+	    slavko =4;
+	    y++;
+	}
+	while(slavko > mirko && z == 0){
+	    std::cout << "slavko";
+	    z++;
+	}
+	while(slavko < mirko && z == 0){
+	    std::cout << "mirko";
+	    z++;
+	}
+	while(slavko == mirko && z == 0){
+	    std::cout << "nerijeseno";
+	    z++;
+	}
+}
+
+
+---------------------------------------------------
+zadatak ucenici 
+
+#include<iostream>
+#include <string>
+
+int main() {
+	float broj_unosa = 0;
+	float unosi = 0;
+	float counter = 120;
+	std::string ime = " ", prezime = " ", oib = " ", mbg = " ";
+	int godine = 0;
+	std::string ime1 = " ", prezime1 = " ", oib1 = " ", mbg1 = " ";
+	int godine1 = 0;
+	std::cin >> broj_unosa;
+	for (int i = 0; i < broj_unosa; i++) {
+		std::cin >> ime >> prezime >> godine >> oib >> mbg;
+		while (godine < counter) {
+			counter = godine;
+			ime1 = ime;
+			prezime1 = prezime;
+			godine1 = godine;
+			oib1 = oib;
+			mbg1 = mbg;
+		}
+	}
+	std::cout << ime1 << " " << prezime1 << " " << godine1;
+}
+
+
+
+---------------------------------------------------------
+puding zadatak (sa while)
+
+#include <iostream>
+#include <string>
+
+int main() {
+	int N = 0, A = 0, B = 0, C = 0, D = 0, E = 0, x = 0;
+	std::cin >> N >> A >> B >> C >> D >> E;
+	while (((N - ((A + B + C) / 2)) < (D / 2) && x == 0)) {
+		x++;
+		std::cout << "PUDING OD VANILIJE";
+	}
+	while (((N - ((A + B + C) / 2)) >= (D / 2) && x == 0)) {
+		x++;
+		std::cout << "PUDING OD COKOLADE";
+	}
+}
+
+
+
+----------------------------------------------------------
+zadatak app
+#include <iostream>
+#include <string>
+
+int main() {
+	int igra_a = 0, igra_b = 0, cijena_a_1 = 0, cijena_a_2 = 0, cijena_b_1 = 0, cijena_b_2 = 0;
+	std::cin >> igra_a >> igra_b >> cijena_a_1 >> cijena_a_2 >> cijena_b_1 >> cijena_b_2;
+	if (igra_a > igra_b) {
+		if (cijena_a_1 < cijena_a_2) {
+			std::cout << cijena_a_1;
+		}
+		else {
+			std::cout << cijena_a_2;
+		}
+	}
+	else {
+		if (cijena_b_1 < cijena_b_2) {
+			std::cout << cijena_b_1;
+		}
+		else{
+			std::cout << cijena_b_2;
+		}
+	}
+}
+
+
+
+------------------------------------------------------------
+
+
+
