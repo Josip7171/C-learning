@@ -1,0 +1,14 @@
+#include <iostream>
+#include <iomanip>
+
+int main()
+{
+    std::cout << "Hello World!\n"; 
+	int ocjene[10], counter = 0;
+	for (int i = 0; i < 10; i++) {
+		std::cout << "\nUpisite " << i + 1 << " ocjenu : ";
+		std::cin >> ocjene[i];
+		counter += ocjene[i];
+	}
+	std::cout << "\n\nProsjek ocjena je : " << std::fixed << std::setprecision(2) << float(counter) / 10 << " .\n";
+}
