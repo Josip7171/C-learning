@@ -1,0 +1,30 @@
+#include <iostream>
+#include <vector>
+
+int main()
+{
+	std::vector<std::vector<std::vector<char>>> v;
+	int x = 0, N = 0;
+	std::cout << "Koliko polja zelite : ";
+	std::cin >> N;
+	for (int i = 0; i < N; i++) {
+		std::vector<std::vector<char>> temp;
+		for (int j = 0; j < N; j++) {
+			std::vector<char> temp2;
+			for (int k = 0; k < N; k++) {
+				temp2.push_back('.');
+			}
+			temp.push_back(temp2);
+		}
+		v.push_back(temp);
+	}
+
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			for (int k = 0; k < N; k++) {
+				std::cout << v[i][j][k] << "  ";
+			}
+		}
+		std::cout << std::endl;
+	}
+}
