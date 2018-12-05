@@ -1,0 +1,30 @@
+#include <iostream>
+
+int main()
+{
+	int konacni_broj1 = 0, konacni_broj2 = 0, unos = 0, broj[5];
+	for (int i = 0; i < 5; i++) {
+		std::cin >> unos;
+		broj[i] = unos;
+		konacni_broj1 += unos;
+	}
+	std::cin >> unos;
+	for (int i = 0; i < 4; i++) {
+		if ((((broj[0] * broj[1]) - broj[2]) + broj[3]) / broj[4] == unos) {
+			konacni_broj2 = (((broj[0] + broj[1]) - broj[2]) * broj[3]) / broj[4];
+		}
+		else if (unos == (((broj[0] - broj[1]) + broj[2]) * broj[3]) / broj[4]) {
+			konacni_broj2 = (((broj[0] - broj[1]) + broj[2]) * broj[3]) / broj[4];
+		}
+		else if (unos == (((broj[0] - broj[1]) + broj[2]) * broj[3]) / broj[4]) {
+			konacni_broj2 = (((broj[0] - broj[1]) + broj[2]) * broj[3]) / broj[4];
+		}
+	}
+	konacni_broj2 = (((broj[0] + broj[1]) - broj[2]) * broj[3]) / broj[4];
+	if (konacni_broj1 == unos) {
+		std::cout << broj[0] << "+" << broj[1] << "+" << broj[2] << "+" << broj[3] << "+" << broj[4] << "=" << unos;
+	}
+	else if (konacni_broj2 == unos) {
+		std::cout << broj[0] << "+" << broj[1] << "-" << broj[2] << "*" << broj[3] << "/" << broj[4] << "=" << unos;
+	}
+}
