@@ -46,7 +46,7 @@ int main (){
 				counter_b = 115;
 			}
 		}
-		if(counter_a == 40 && counter_b == 40){
+		if(counter_a == 40 && counter_b == 40 && i != number_of_rounds-1){
 			counter_a = 100;
 			counter_b = 100;
 		}
