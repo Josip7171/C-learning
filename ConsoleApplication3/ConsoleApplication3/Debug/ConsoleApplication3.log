@@ -1,0 +1,4 @@
+﻿  ConsoleApplication3.cpp
+c:\users\uc-m09\documents\github\patkica1\consoleapplication3\consoleapplication3\consoleapplication3.cpp(51): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\uc-m09\documents\github\patkica1\consoleapplication3\consoleapplication3\consoleapplication3.cpp(65): error C2660: 'zadatak5': function does not take 1 arguments
+  c:\users\uc-m09\documents\github\patkica1\consoleapplication3\consoleapplication3\consoleapplication3.cpp(18): note: see declaration of 'zadatak5'
