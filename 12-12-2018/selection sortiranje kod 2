@@ -1,0 +1,45 @@
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+#include <vector>
+
+
+void selectionSort(int list[], int size);
+
+int main()
+{
+	std::srand(time(NULL));
+	int size = 0, d = 0;
+	std::cout << "Unesite velicinu liste : ";
+	std::cin >>size;
+	int *list = new int[size];
+
+	std::cout << "\nUnesite random brojeve " << size << " puta.\n: ";
+	for (int i = 0; i < size; i++) {
+		list[i] = rand() % 1000; 
+		std::cout << "\nBroj " << i + 1 << " : " << list[i];
+	}
+
+	std::cout << "\n\nAjmo ju sortirati... (stisni ENTER)";
+	std::cin.ignore();
+	std::cin.ignore();
+	
+	selectionSort(list, size);
+
+	std::cout << "\nSortirana lista : ";
+	for (int i = 0; i < size; i++) std::cout << list[i] << ", ";
+	std::cout << std::endl;
+	system("PAUSE");
+}
+
+
+void selectionSort(int list[], int size) {
+	int temp = 0, j = 0;
+	for (int i = 1; i < size; i++) {
+		temp = list[i];
+		for (j = i - 1; j >= 0 && list[j] > temp; j--) {
+			list[j + 1] = list[j];
+		}
+		list[j+1] = temp;
+	}
+}
