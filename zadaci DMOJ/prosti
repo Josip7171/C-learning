@@ -1,0 +1,35 @@
+/*
+Prosti brojevi su oni brojevi koji su djeljivi isključivo sa 1 i sa samim sobom. U ovome zadatku je potrebno za uneseni prirodni broj N ispisati "prost" ako je broj prost, odnosno "nije prost" ako broj nije prost.
+
+Ulazni podaci
+U jedinom retku ulaza nalazi se prirodni broj N, za kojega treba provjeriti je li prost ili ne.
+
+Izlazni podaci
+U jedinom retku izlaza potrebno je ispisati jedan od 2 moguća izlaza, "prost" ili "nije prost".
+
+Primjeri test podataka
+Ulaz
+Copy
+42
+Izlaz
+Copy
+nije prost
+*/
+
+
+
+#include <iostream>
+#include <cmath>
+int main()
+{
+	int unos = 0, i = 2;
+	std::cin >> unos;
+	for(; i < sqrt(unos); i++){
+		if(unos%i == 0){
+			std::cout << "nije prost";
+			i = unos+1;
+		}
+	}
+	if(i < unos)
+		std::cout << "prost";
+}

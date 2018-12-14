@@ -1,0 +1,70 @@
+/*
+Pčelac Medić ima samo jedan pokušaj da položi stručni pčelarski ispit. Polaganje ispita se odvija na poligonu koji ima 10 cvjetova (0, 1, ... , 9), a čiji je nacrt Pčelac dobio prije ispita.
+
+enter image description here
+
+Na početku ispita Pčelac dobije vreću s 50 grama peluda. S tom torbom polijeće sa starta (cvijet oznake „0“), leti s cvijeta na cvijet, te treba doletjeti do cilja (cvijet oznake „9“) prateći i poštujući putokaze. Na svakom cvijetu (osim „0“ i „9“), Pčelac može dobiti još peluda kao nagradu ili mora ostaviti peluda kao preduvjet za nastavak puta. Ako u torbi ne bude imao dovoljno peluda za ostaviti na cvijetu, tada je odmah pao ispit. Svaki cvijet smije dotaknuti samo jednom.
+
+Pčelac je položio ispit ako je došao do cilja i ako je količina peludi koju je imao u torbi bila najveća moguća koju je mogao sakupiti poštujući zadana pravila ispita.
+
+Analizirajući poligon i zadane uvjete, Pčelac je otkrio da postoji samo jedna prava putanja kretanja koja će mu omogućiti da iz prve položi ispit. Napiši program koji ispisuje tu optimalnu putanju kretanja i maksimalnu količinu peludi koju će Pčelac Medić sakupiti na tom putu.
+
+u primjerima vrijednima 70% bodova, Pčelac će uvijek imati dovoljno peluda u torbi;
+
+Ulazni podaci
+Osam cijelih brojeva Ci (−50≤Ci≤50,i=1..8), gdje je Ci količina peluda u gramima na cvijetu oznake i koju Pčelac može dobiti ili mora ostaviti. Pozitivan broj je količina peluda koju će dobiti, a negativan broj količina peluda koju mora ostaviti;
+
+Izlazni podaci
+niz jednoznamenkastih brojeva odvojenih razmakom koji predstavljaju oznake cvjetova u poretku optimalne putanje iz uvjeta zadatka (start i cilj su uključeni u putanju);
+prirodan broj koji predstavlja maksimalnu količinu sakupljene peludi iz uvjeta zadatka.
+Primjeri test podataka
+Ulaz
+Copy
+22
+1
+-44
+29
+-12
+-38
+46
+26
+Izlaz
+Copy
+0 1 2 3 4 5 6 7 8 9
+80
+*/
+
+
+
+#include <iostream>
+
+#define start_pelud 50
+
+int main(){
+	int inputs[8];
+
+	for(int i = 0; i < 8; i++)
+		std::cin >> inputs[i];
+
+	int sol[4];
+	sol[0] = start_pelud + inputs[4] + inputs[3];
+	sol[1] = start_pelud + inputs[0] + inputs[1] + inputs[2] + inputs[3];
+	sol[2] = start_pelud + inputs[4] + inputs[5] +inputs[6]+ inputs[7];
+	sol[3] = start_pelud + inputs[0] + inputs[1]+ inputs[2]+inputs[3]+inputs[4]+inputs[5]+inputs[6]+inputs[7];
+
+	int temp = sol[0];
+	for (int i = 1; i < 4; i++){
+		if(temp < sol[i])
+			temp = sol[i];
+	}
+
+
+	if(temp == sol[0])
+		std::cout << "0 5 4 9\n" << sol[0];
+	else if(temp == sol[1])
+		std::cout << "0 1 2 3 4 9\n" << sol[1];
+	else if(temp == sol[2])
+		std::cout << "0 5 6 7 8 9\n" << sol[2];
+	else if(temp == sol[3])
+		std::cout << "0 1 2 3 4 5 6 7 8 9\n" << sol[3];
+}

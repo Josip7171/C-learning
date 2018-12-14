@@ -1,0 +1,77 @@
+/*
+Anko i Ankica igraju novu igru s kutijicama i kuglicama. Anko na školsku klupu rasporedi 10 kutijica jednu pored druge na 10 pozicija koje je označio brojevima od 1 do 10, i zatim ispod dvije kutije sakrije po jednu kuglicu. Ankica ga promatra dok skriva kuglice te zna na kojim se pozicijama ispod kutija nalazi kuglica. Zatim Anko 5 puta zamijeni mjesta kutijama na dvije pozicije.
+
+Cilj igre jest da Ankica pogodi u kojim se kutijama nalaze kuglice nakon što Anko napravi svoje zamjene.
+
+Ulazni podaci
+u prvom redu se nalaze 2 prirodna broja od 1 do 10 koji označavaju da je u kutiji na toj poziciji Anko sakrio kuglicu;
+u sljedećih 5 redova se nalaze po dva prirodna broja od 1 do 10 koji govore s koje dvije pozicije Anko zamijeni kutijice;
+Izlazni podaci
+U jedinoj liniji izlaza potrebno je ispisati pozicije na kojima se nalaze kutije s kuglicama, prvo manju poziciju, a zatim veću.
+
+Primjeri test podataka
+Ulaz
+Copy
+2 9
+2 4
+3 4
+3 7
+1 7
+1 6
+Izlaz
+Copy
+6 9
+*/
+
+
+#include <iostream>
+#include <cstdio>
+
+int main (){
+	int kutije[10], unos1 = 0, unos2 = 0, pomocni = 0;
+
+	//unesi lokacije kuglica
+	std::cin >> unos1 >> unos2;
+
+	//unesi koje kutije mjenjaju svoja mjesta
+	for (int i = 0; i < 10; i++) {
+		kutije[i] = 0;
+		if (i == unos1-1)
+			kutije[i] = 1;
+		if (i == unos2-1)
+			kutije[i] = 1;
+	}
+
+	//POMOCNA FOR PETLJA
+	//for(int i = 0; i < 10; i++)
+	//	std::cout << kutije[i] << ", ";
+
+
+
+	//unosi 5 para vrijednosti
+	for (int i = 0; i < 5; i++) {
+		std::cin >> unos1 >> unos2;
+		pomocni = kutije[unos1-1];
+		kutije[unos1-1] = kutije[unos2-1];
+		kutije[unos2-1] = pomocni;
+	}
+
+	//POMOCNA FOR PETLJA
+	//for(int i = 0; i < 10; i++)
+	//	std::cout << kutije[i] << ", ";
+
+
+	pomocni = 0;
+	int polje[2];
+	for (int i = 0; i < 10; i++) {
+		if (kutije[i] == 1){
+			polje[pomocni] = i+1;
+			pomocni++;
+		}
+	}
+
+	if(polje[0] < polje[1])
+		std::cout << polje[0] << " " << polje[1];
+	else
+		std::cout << polje[1] << " " << polje[0];
+}
