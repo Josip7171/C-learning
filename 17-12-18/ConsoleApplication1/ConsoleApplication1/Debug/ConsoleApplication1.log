@@ -1,0 +1,9 @@
+﻿  ConsoleApplication1.cpp
+c:\users\uc-m09\documents\github\patkica1\17-12-18\consoleapplication1\consoleapplication1\consoleapplication1.cpp(99): warning C4018: '<': signed/unsigned mismatch
+c:\users\uc-m09\documents\github\patkica1\17-12-18\consoleapplication1\consoleapplication1\consoleapplication1.cpp(122): warning C4018: '<': signed/unsigned mismatch
+c:\users\uc-m09\documents\github\patkica1\17-12-18\consoleapplication1\consoleapplication1\consoleapplication1.cpp(143): warning C4018: '<': signed/unsigned mismatch
+c:\users\uc-m09\documents\github\patkica1\17-12-18\consoleapplication1\consoleapplication1\consoleapplication1.cpp(154): warning C4129: 'S': unrecognized character escape sequence
+c:\users\uc-m09\documents\github\patkica1\17-12-18\consoleapplication1\consoleapplication1\consoleapplication1.cpp(165): warning C4018: '<': signed/unsigned mismatch
+c:\users\uc-m09\documents\github\patkica1\17-12-18\consoleapplication1\consoleapplication1\consoleapplication1.cpp(209): warning C4018: '<': signed/unsigned mismatch
+c:\users\uc-m09\documents\github\patkica1\17-12-18\consoleapplication1\consoleapplication1\consoleapplication1.cpp(217): warning C4018: '<': signed/unsigned mismatch
+  ConsoleApplication1.vcxproj -> C:\Users\UC-M09\Documents\GitHub\Patkica1\17-12-18\ConsoleApplication1\Debug\ConsoleApplication1.exe
