@@ -1,0 +1,45 @@
+/*
+Kapetan Jack Sparrow ima problem. Za organizaciju svog novog piratskog poduhvata treba kupiti novi brod. Ali na brodovima koji ga zanimaju nema istaknute cijene već je na svakom od njih nalijepljen neki čudni barkod. Treba mu pomoć kako bi barkod pretvorio u prirodan broj i tako saznao cijenu broda. ​ Barkod se sastoji od pet uspravnih barkod linija koje mogu biti duge i kratke. Svaka od tih pet linija ima određenu vrijednost koja je zapisana ispod linije. Broj koji odgovara zadanom barkodu se dobije kao zbroj vrijednosti dugih linija. Vrijednosti linija se zadaju peteroznamenkastim brojem, pri čemu je prva znamenka u broju vrijednost prve linije, druga znamenka vrijednost druge linije, itd. Jedino što Jack zna je da u poznatoj piratskoj luci Tortugi taj broj uvijek iznosi 74210, a da se za ostale luke taj broj posebno zadaje.
+
+Ulazni podaci
+prirodan peteroznamenkasti broj N, vrijednost linija u zadanom barkodu;
+pet znakova 'D' (duga linija) ili 'K' (kratka linija) jedan ispod drugog, redom duljine linija u barkodu promatrajući barkod s lijeva na desno;
+Izlazni podaci
+Prirodan broj koji predstavlja vrijednost barkoda;
+
+Primjeri test podataka
+Ulaz
+Copy
+74210
+D
+D
+D
+D
+D
+Izlaz
+Copy
+14
+*/
+
+
+#include <iostream>
+#include <string>
+#include <stdint.h>
+int main(){
+	int counter = 0, char_to_int = 0;
+	char barcode[6];
+	char barcode_letter = ' ';
+	//input barcode
+	for(int i = 0; i < 5; i++){
+		std::cin >> barcode[i];
+	}
+	//input barcode letters
+	for (int i = 0; i < 5; i++){
+		std::cin >> barcode_letter;
+		if(barcode_letter == 'D'){
+			char_to_int = barcode[i] - '0';
+			counter += char_to_int;
+		}
+	}
+	std::cout << counter;
+}

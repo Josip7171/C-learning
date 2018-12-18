@@ -1,0 +1,32 @@
+/*
+U ovome zadatku dan je prirodni broj N te je potrebno ispisati sve parne brojeve u intervalu od 1 do N.
+
+Ulazni podaci
+U prvom i jedinom retku ulaza potrebno je učitati prirodni broj N.
+
+Izlazni podaci
+Izlaz se sastoji od više redaka te je potrebno ispisati po jedan paran broj u svakom retku.
+
+Primjeri test podataka
+Ulaz
+Copy
+8
+Izlaz
+Copy
+2
+4
+6
+8
+*/
+
+
+
+#include <iostream>
+int main()
+{
+	int unos = 0;
+	std::cin >> unos;
+	for(int i = 2; i <= unos; i+=2){
+		std::cout << i << std::endl;
+	}
+}

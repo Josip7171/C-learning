@@ -1,0 +1,56 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+int search_it(int min, int max, int locator, int current);
+
+int counter = 0;
+
+int main()
+{
+	int locator = 0 , min = 0, max = 0, result, current = 0;
+	std::cout << "Ovo je algoritam pretrazivanja broja od ? do ?.";
+	std::cout << "\nUnesite minimalni moguci broj : ";
+	std::cin >> min;
+	std::cout << "\nUnesite maksimalni moguci broj : ";
+	std::cin >> max;
+	std::cout << "\nUnesite trazeni broj : ";
+	std::cin >> locator;
+
+	bool *list = new bool[max];
+	for (int i = 0; i < max; i++) {
+		list[i] = 0;
+	}
+	list[locator] = 1;
+
+
+	result = search_it(min, max, locator, current);
+	std::cout << result << std::endl;
+	system("PAUSE");
+}
+
+
+
+int search_it(int min, int max, int locator, int current) {
+
+	counter++;
+	current = ((max - min)/2) + min;
+	std::cout << "\nCurrent looking in " << current << std::endl;
+	//std::cout << "\nMin = " << min << ", max = " << max << ", locator = " << locator;
+	std::cin.ignore();
+		
+	if (current < locator) {
+		min = current;
+		search_it(min, max, locator, current);
+	}
+	else if (current > locator) {
+		max  = current;
+		search_it(min, max, locator, current);
+	}
+	else if (locator == current) {
+		std::cout << "\nGuessed in " << counter << " trys.";
+		return current;
+	}
+
+}
+

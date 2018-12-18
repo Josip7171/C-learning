@@ -1,0 +1,61 @@
+/*
+Ribar Šime noćas je ulovio N tuna. Putem posebne aplikacije ponudio ih je na prodaju poznatoj japanskoj tvrtki za otkup kvalitetne ribe. Kako aplikacija procjenjuje vrijednost, tj. cijenu jedne tune?
+
+Na osnovi fotografije tune program daje dvije procjene vrijednosti, P1 i P2 . Ako je razlika tih procjena manja ili jednaka od X, tada se za vrijednost tune uzima veća od dvije dane procjene. Ako je razlika procjena strogo veća od X, program daje treću procjenu P3 i ta se procjena tada uzima za vrijednost tune.
+
+Napišite program koji će na temelju zadanih procjena kojih će nekad biti dvije, a nekad tri za svaku od N tuna, ispisati ukupnu vrijednost ulovljenih tuna.
+
+Ulazni podaci
+U prvom retku nalazi se prirodan broj N (1 ≤ N ≤ 20), broj tuna iz teksta zadatka. U drugom retku nalazi se prirodan broj X (1 ≤ X ≤ 10), broj iz teksta zadatka. Zatim slijedi N blokova podataka koji mogu biti oblika:
+
+● u jednom retku dva prirodna broja P1 i P2 (1 ≤ P1 , P2 ≤ 100) iz teksta zadatka,
+
+ili
+
+● u jednom retku dva prirodna broja P1 i P2 (1 ≤ P1 , P2 ≤ 100) iz teksta zadatka te u drugom retku jedan prirodan broj P3 (1 ≤ P3 ≤ 100) iz teksta zadatka.
+
+Izlazni podaci
+U prvi redak treba ispisati ukupnu vrijednost ulovljenih tuna.
+
+Primjeri test podataka
+Ulaz
+Copy
+5
+2
+3 4
+2 1
+5 3
+4 4
+4 2
+Izlaz
+Copy
+19
+*/
+
+
+#include <iostream>
+#include "math.h"
+
+int main()
+{
+	int broj_tuna = 0, razlika_cijene = 0, zbroj_cijena = 0, unos1 = 0, unos2 = 0, unos3 = 0;
+
+	std::cin >> broj_tuna;
+	std::cin >> razlika_cijene;
+	for (int i = 0; i < broj_tuna; i++) {
+		std::cin >> unos1 >> unos2;
+		if (std::abs(unos1 - unos2) > razlika_cijene ){
+			std::cin >> unos3;
+			zbroj_cijena += unos3;
+		}
+		else {
+			if (unos1 < unos2) {
+				zbroj_cijena += unos2;
+			}
+			else {
+				zbroj_cijena += unos1;
+			}
+		}
+	}
+	std::cout << zbroj_cijena;
+}

@@ -1,0 +1,29 @@
+#include <iostream>
+
+void zamjena(int *broj1, int *broj2);
+void zamjena2(int &broj1, int &broj2);
+
+int main()
+{
+	int broj1 = 5, broj2 = 10;
+	std::cout << broj1 << ", " << broj2;
+	zamjena(&broj1, &broj2);						//prvi nacin
+	std::cout << "\n" << broj1 << ", " << broj2;
+	zamjena2(broj1, broj2);					//drugi nacin
+	std::cout << "\n" << broj1 << ", " << broj2;
+}
+
+//prvi nacin
+void zamjena(int *broj1, int *broj2) {		//pointer prima samo adresu
+	int pomocna = *broj1;
+	*broj1 = *broj2;
+	*broj2 = pomocna;
+}
+
+//drugi nacin
+void zamjena2(int &broj1, int &broj2) {
+	int pomocna = broj1;
+	broj1 = broj2;
+	broj2 = pomocna;
+}
+

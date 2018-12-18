@@ -1,0 +1,77 @@
+/*
+Mirko se prijavio za kviz-show „1 protiv 100“. U tom kvizu, Mirko i 100 njegovih izazivača odgovaraju na postavljena pitanja. Mirkov cilj je iz kviza izbaciti sve izazivače i pri tome zaraditi. Kviz ima bezbroj verzija, a pravila verzije u kojoj Mirko sudjeluje su sljedeća:
+
+prije svakog postavljenog pitanja, izazivači između sebe svaki put iznova podijele 100000 kuna na jednake dijelove (cjelobrojnim dijeljenjem);
+kada voditelj kviza postavi Mirku i njegovim izazivačima pitanje, izazivači moraju odmah odgovoriti, a Mirko ima priliku malo razmisliti prije odgovora;
+ako Mirko krivo odgovori na postavljeno pitanje, napušta kviz bez osvojene kune;
+ako točno odgovori, tada se gleda koliko je izazivača krivo odgovorilo na pitanje. Oni napuštaju kviz i svaki mora svoj dio novca koji je dobio u tom krugu, dati Mirku;
+Mirko može tri puta preskočiti pitanje, tj. ne odgovarati. Kada se to dogodi, izazivači koji su krivo odgovorili na pitanje napuštaju kviz i svoj dio novca koji su dobili u tom krugu daju u humanitarne svrhe;
+kviz se nastavlja postavljenjem pitanja sve dok Mirko krivo ne odgovori ili dok svi izazivači ne napuste igru.
+Napiši program koji će na osnovu ulaznih podataka ispisati koliko je Mirko zaradio u ovom kvizu.
+
+Ulazni podaci
+Unaprijed nepoznat, konačan broj redaka ulaznih podataka oblika znak cijeli_broj:
+
+znak opisuje što je Mirko uradio s pitanjem u određenom krugu ( 'T' : točno odgovorio; 'F' : krivo odgovorio; 'P' : preskočio pitanje);
+cijeli broj N (0≤N≤100) , broj izazivača koji su krivo odgovorili na postavljeno pitanje u određenom krugu;
+Izlazni podaci
+Cijeli broj koji predstavlja iznos kuna koji je Mirko osvojio.
+
+Primjeri test podataka
+Ulaz
+Copy
+T 13
+T 13
+T 5
+F 18
+Izlaz
+Copy
+0
+Ulaz
+Copy
+T 20
+T 3
+T 10
+T 20
+T 3
+T 8
+T 15
+T 8
+T 12
+T 1
+Izlaz
+Copy
+363174
+Ulaz
+Copy
+T 100
+Izlaz
+Copy
+100000
+Objašnjenje
+U prvom krugu, tj. već na prvom pitanju su ispali svi izazivači. Kako je svaki izazivač prije tog kruga dobio 1000 kn, tako je Mirko napustio kviz bogatiji za 100000 kn.
+*/
+
+
+
+#include <iostream>
+int main (){
+	char one_letter;
+	int one_input, counter = 0, p_counter = 0;
+	do{
+		std::cin >> one_letter;
+		std::cin >> one_input;
+		if(one_letter == 'F')
+			counter = 200;		//izadi iz petlje
+		else if(one_letter == 'P')
+			p_counter++;
+		else
+			counter += one_input;
+
+	}while(counter < 100);
+
+	if(p_counter > 3 || counter >= 200)
+		std::cout << 0;
+	else if(p_counter < 3 && counter == 100)
+		std::cout << 100000;
+}

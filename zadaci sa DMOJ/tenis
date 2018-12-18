@@ -1,0 +1,103 @@
+/*
+Prvi potvrđeni spomen igre slične današnjem tenisu nalazimo u zapisima francuskih redovnika iz 11. i 12. stoljeća. Tenis kakav danas poznajemo je nastao oko 1874. kada je Englez Walter Wingfield definirao pravila igre i kada se 1877. po prvi put održao i planetarno popularni teniski turnir u Wimbledonu. Opišimo jedan dio pravila teniske igre koji ćemo koristiti u ovom zadatku.
+
+U teniskom meču bodovanje se vrši po poenima, gemovima i setovima. Setovi se dijele na gemove, a gemovi na poene. Igrač je osvojio poen kada nakon razmjene udaraca loptice reketom, protivnički igrač više nije u stanju vratiti lopticu u tenisko polje na pravilan način. Gem započinje rezultatom „0:0“ u poenima. Nakon određenog broja odigranih poena jedan od igrača osvaja gem. To uspijeva onom tko osvoji najmanje četiri poena i ima barem dva poena više od protivnika. U gemu postoji posebno označavanje osvojenih poena. Prvi osvojeni poen u gemu se za igrača označava s 15, drugi s 30, a treći s 40.
+
+Kada pri rezultatu „40:40“ (tj. svaki od igrača je osvojio po tri poena) neki od igrača osvoji poen, tada on dolazi u prednost (u oznaci AD-oznaka_igrača). Osvoji li igrač u prednosti još jedan poen tada osvaja i cijeli gem. Ako protivnik koji nije u prednosti osvoji poen, tada se proglašava izjednačenje (u oznaci „deuce“). Igra se nastavlja sve dok jedan od igrača ne osvoji dva uzastopna poena te tako i cijeli gem.
+
+Napiši program koji za trenutni rezultat u gemovima nekog trening meča dvojice igrača i opis prvih N odigranih poena u sljedećem gemu koji će igrati, određuje i ispisuje novi rezultat u gemovima i poenima.
+
+Ulazni podaci
+prirodni brojevi AG i BG ( 0≤AG,BG≤6) jedan ispod drugog, trenutni broj osvojenih gemova igrača s oznakom „A“ i igrača s oznakom „B“;
+prirodan broj N ( 1≤N≤20), broj odigranih poena koje opisujemo;
+u sljedećih N redaka se nalazi po jedan znak („A“ ili „B“) koji predstavlja oznaku igrača koji je osvojio i-ti poen
+Izlazni podaci
+u jedini redak izlaza treba ispisati traženi rezultat u obliku „AG:BG AP:BP“ pri čemu će uvijek vrijediti da je 0≤AG,BG≤7, a AP i BP mogu biti prirodni brojevi iz skupa {0, 15, 30, 40} ili tekst „AD-A“ ili „AD-B“ ili „deuce“.
+Primjeri test podataka
+Ulaz
+Copy
+4
+3
+3
+A
+A
+B
+Izlaz
+Copy
+4:3 30:15
+*/
+
+
+
+#include <iostream>
+int main (){
+	int gems_a = 0, gems_b = 0, number_of_rounds = 0, counter_a = 0, counter_b = 0;
+	char point = ' ';
+	//upisi gemove prvog i drugog igraca
+	std::cin >> gems_a >> gems_b;
+	//upisi broj rundi
+	std::cin >> number_of_rounds;
+	for(int i = 0; i < number_of_rounds; i++){
+		std::cin>>point;
+		if(point == 'A'){
+			counter_a += 15;
+			if(counter_a == 45)
+				counter_a -= 5;
+			if(counter_a == 130){
+				gems_a++;
+				counter_a = 0;
+				counter_b = 0;
+			}
+			if(counter_a == 55 && counter_b < 40){
+				gems_a++;
+				counter_a = 0;
+				counter_b = 0;
+			}
+			else if(counter_a == 55 && counter_b >= 40){
+				counter_a = 115;
+				counter_b = 100;
+			}
+		}
+		else if(point == 'B'){
+			counter_b += 15;
+			if(counter_b == 45)
+				counter_b -= 5;
+			if(counter_b == 130){
+				gems_b++;
+				counter_a = 0;
+				counter_b = 0;
+			}
+			if(counter_b == 55 && counter_a < 40){
+				gems_b++;
+				counter_a = 0;
+				counter_b = 0;
+			}
+			else if(counter_b == 55 && counter_a >= 40){
+				counter_a = 100;
+				counter_b = 115;
+			}
+		}
+		if(counter_a == 40 && counter_b == 40 && i != number_of_rounds-1){
+			counter_a = 100;
+			counter_b = 100;
+		}
+		if(counter_a == 115 && counter_b == 115){
+				counter_a = 100;
+				counter_b = 100;
+			}
+	}
+
+	std::cout << gems_a << ":" << gems_b << " ";
+	if(counter_a == 100 && counter_b == 100){
+		std::cout << "deuce";
+	}
+	else if(counter_a == 100 && counter_b == 115){
+		std::cout << "AD-B";
+	}
+	else if(counter_a == 115 && counter_b == 100){
+		std::cout << "AD-A";
+	}
+	else{
+		std::cout <<counter_a << ":" << counter_b;
+	}
+}

@@ -1,0 +1,59 @@
+/*
+Nakon nekoliko mjeseci igranja na svom novom mobitelu, Mirko je konačno odlučio naći neki novi hobi. Tako je otkrio kartašku igru bridž!
+
+Poznato je da bridž igraju četiri igrača s ukupno 52 karte u 4 boje (pik, herc, karo i tref) i 13 vrijednosti (A, K, Q, J, 10, 9, 8, 7, 6, 5, 4, 3 i 2). Na početku igre svaki igrač dobije točno 13 karata.
+
+Prije početka igre svaki igrač prebroji svoje tzv. honerske poene na sljedeći način:
+
+svaki as koji je dobio (A) vrijedi 4 poena
+svaki kralj koji je dobio (K) vrijedi 3 poena
+svaka dama koju je dobio (Q) vrijedi 2 poena
+svaki dečko koji je dobio (J) vrijedi 1 poen
+sve ostale karte (koje ćemo u zadatku označavati s X) vrijede 0 poena.
+Kako je Mirko tek nedavno počeo igrati bridž, odlučio je vježbati to brojanje. N puta si je podijelio karte i svaki put je prebrojio svoje honerske poene. Na kraju ih je sve zbrojio. Zanima ga je li napravio dobar posao. Pomozite Mirku i provjerite to!
+
+Ulazni podaci
+U prvom retku nalazi se cijeli broj N (1 ≤ N ≤ 10 000) iz teksta zadatka.
+
+U sljedećih N redaka nalazi se Ki , niz znakova (‘A’, ‘K’, ‘Q’, ‘J’, ‘X’) duljine 13, karte koje je Mirko držao u ruci nakon što si je i-ti put podijelio karte.
+
+Izlazni podaci
+U jedini redak ispišite traženi zbroj iz teksta zadatka.
+
+Primjeri test podataka
+Ulaz
+Copy
+1
+AKXAKJXXXAXAQ
+Izlaz
+Copy
+25
+Objašnjenje
+Mirko u ruci drži ukupno 4 asa, 2 kralja, 1 damu i 1 dečka.
+
+To je ukupno 4 4 + 2 3 + 1 2 + 1 1 = 25 honerskih poena.
+*/
+
+
+
+#include <iostream>
+#include <string>
+int main(){
+	std::string znakovi;
+	int unosa = 0, counter = 0;
+	std::cin>> unosa;
+	for(int i= 0; i < unosa; i++){
+		std::cin>>znakovi;
+		for(int j = 0; j < 13; j++){
+			if(znakovi[j] == 'A')
+				counter += 4;
+			else if(znakovi[j] == 'K')
+				counter += 3;
+			else if(znakovi[j] == 'Q')
+				counter += 2;
+			else if(znakovi[j] == 'J')
+				counter += 1;
+		}
+	}
+	std::cout << counter;
+}

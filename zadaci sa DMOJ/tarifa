@@ -1,0 +1,42 @@
+/*
+Pero je sa svojim pružateljem internetskih usluga dogovorio “Jako dobru” tarifu za surfanje internetom. Pružatelj će Peri svaki mjesec dati na korištenje X megabajta koja on može potrošiti na surfanje internetom. Svaki megabajt koji ne potroši u tom mjesecu prenosi se u sljedeći mjesec te se i dalje može trošiti. Naravno, Pero može potrošiti samo one megabajte koje ima.
+
+Ako znamo koliko je Pero potrošio megabajta u svakom od prvih N mjeseci od odabira tarife, odredite koliko će megabajta Pero imati na raspolaganju u N + 1 mjesecu korištenja tarife.
+
+Ulazni podaci
+U prvom retku nalazi se prirodan broj X (1 ≤ X ≤ 100).
+
+U drugom retku nalazi se prirodan broj N (1 ≤ N ≤ 100).
+
+U sljedećih N redaka nalazi se po jedan cijeli broj Pi (0 ≤ Pi ≤ 10 000), broj potrošenih megabajta u svakom od prvih Nmjeseci korištenja tarife. Brojevi Pi bit će takvi da Pero nikada neće potrošiti više megabajta nego što trenutno ima.
+
+Izlazni podaci
+U prvi redak treba ispisati traženu vrijednost iz teksta zadatka.
+
+Primjeri test podataka
+Ulaz
+Copy
+10
+3
+4
+6
+2
+Izlaz
+Copy
+28
+Objašnjenje
+U prvom mjesecu Pero je od 10 dobivenih megabajta potrošio njih 4 te je 6 prenio u sljedeći mjesec. U drugom mjesecu je od 16 mogućih (10+6) potrošio 6 i dalje prenio 10. U trećem mjesecu je od 20 mogućih (10+10) potrošio 2 i dalje prenio 18. U četvrtom mjesecu imao je ukupno 28 megabajta za potrošiti.
+*/
+
+
+
+#include <iostream>
+int main (){
+	int mb = 0, mj = 0, unos, ukupno = 0;
+	std::cin>> mb >>mj;
+	for(int i = 0; i < mj; i++){
+		std::cin>> unos;
+		ukupno = ukupno + (mb- unos);
+	}
+	std::cout << ukupno+mb;
+}
