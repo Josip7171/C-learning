@@ -1,0 +1,7 @@
+﻿  ConsoleApplication4.cpp
+c:\users\uc-m09\documents\github\patkica1\consoleapplication4\consoleapplication4\consoleapplication4.cpp(94): error C2248: 'Node::value': cannot access private member declared in class 'Node'
+  c:\users\uc-m09\documents\github\patkica1\consoleapplication4\consoleapplication4\consoleapplication4.cpp(10): note: see declaration of 'Node::value'
+  c:\users\uc-m09\documents\github\patkica1\consoleapplication4\consoleapplication4\consoleapplication4.cpp(9): note: see declaration of 'Node'
+c:\users\uc-m09\documents\github\patkica1\consoleapplication4\consoleapplication4\consoleapplication4.cpp(95): error C2248: 'Node::next': cannot access private member declared in class 'Node'
+  c:\users\uc-m09\documents\github\patkica1\consoleapplication4\consoleapplication4\consoleapplication4.cpp(11): note: see declaration of 'Node::next'
+  c:\users\uc-m09\documents\github\patkica1\consoleapplication4\consoleapplication4\consoleapplication4.cpp(9): note: see declaration of 'Node'

@@ -12,4 +12,12 @@ link sa demonstracijama sortiranja
 
 
 http://adbc.kennesaw.edu/
-online zadaci iz baza podataka
+online zadaci iz baza podataka (GRAFOVI)
+
+
+https://www.w3resource.com/mysql-exercises/
+online tutoriali i zadaci baze podataka
+
+
+https://www.draw.io/
+Link za dizajniranje koda, klasa, ...
