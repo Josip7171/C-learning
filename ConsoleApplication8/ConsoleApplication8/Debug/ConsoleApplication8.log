@@ -6,4 +6,5 @@ c:\users\uc-m09\documents\github\patkica1\consoleapplication8\consoleapplication
 c:\users\uc-m09\documents\github\patkica1\consoleapplication8\consoleapplication8\consoleapplication8.cpp(126): warning C4018: '<': signed/unsigned mismatch
 c:\users\uc-m09\documents\github\patkica1\consoleapplication8\consoleapplication8\consoleapplication8.cpp(395): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 c:\users\uc-m09\documents\github\patkica1\consoleapplication8\consoleapplication8\consoleapplication8.cpp(204): warning C4715: 'Game::randoms_to_chars': not all control paths return a value
+c:\users\uc-m09\documents\github\patkica1\consoleapplication8\consoleapplication8\consoleapplication8.cpp(524): warning C4715: 'Game2::randoms_to_chars': not all control paths return a value
   ConsoleApplication8.vcxproj -> C:\Users\UC-M09\Documents\GitHub\Patkica1\ConsoleApplication8\Debug\ConsoleApplication8.exe
