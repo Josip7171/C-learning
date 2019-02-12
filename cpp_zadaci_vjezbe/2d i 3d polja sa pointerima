@@ -1,0 +1,82 @@
+#include <iostream>
+
+void dvodimenzionalnoPolje();
+void triDpolja();
+
+
+int main()
+{
+	//dvodimenzionalnoPolje();
+	triDpolja();
+}
+
+void dvodimenzionalnoPolje()
+{
+	int x, y, z;
+	std::cout << "Unesite velicine polja: ";
+	std::cin >> x >> y >> z;
+
+	int **p_p_polje = new int*[x];
+
+	for (int i = 0; i < x; i++)
+	{
+		p_p_polje[i] = new int[y];
+	}
+
+	for (int i = 0; i < x; i++)
+	{
+		for (int j = 0; j < y; j++)
+		{
+			std::cout << "Unesite vrijednost polja[" << i << "], [" << j << "]: ";
+			std::cin >> p_p_polje[i][j];
+		}
+	}
+	for (int i = 0; i < x; i++)
+	{
+		for (int j = 0; j < y; j++)
+		{
+			std::cout << p_p_polje[i][j] << "\t";
+		}
+		std::cout << std::endl;
+	}
+
+	for (int i = 0; i < x; i++)
+	{
+		delete p_p_polje[i];
+	}
+	delete p_p_polje;
+	p_p_polje = nullptr;
+}
+
+void triDpolja() {
+	std::cout << "\nUnesi vrijednosti 3d polja : ";
+	int x, y, z;
+	std::cin >> x >> y >> z;
+	int ***p_p_p_polje = new int**[x];
+
+	for (int i = 0; i < x; i++) {
+		p_p_p_polje[i] = new int*[y];
+		for (int j = 0; j < y; j++) {
+			p_p_p_polje[i][j] = new int[z];
+		}
+	}
+
+	for (int i = 0; i < x; i++) {
+		for (int j = 0; j < y; j++) {
+			for (int k = 0; k < z; k++) {
+				std::cout << "Unesite vrijednost polja[" << i << "], [" << j << "], [" << k << "] : ";
+				std::cin >> p_p_p_polje[i][j][k];
+			}
+		}
+	}
+
+	for (int i = 0; i < x; i++) {
+		for (int j = 0; j < y; j++) {
+			for (int k = 0; k < z; k++) {
+				std::cout << p_p_p_polje[i][j][k] << "\t";
+			}
+			std::cout << std::endl;
+		}
+		std::cout << std::endl;
+	}
+}

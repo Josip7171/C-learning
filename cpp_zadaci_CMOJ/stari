@@ -1,0 +1,76 @@
+/*
+Marini je dosadno. Napisala je zadaću, prošetala psa, pospremila sobu, a zbog tehničkog kvara nije bilo interneta u cijelom gradu. Zato je odlučila riješiti jedan tipičan numerički zadatak s nekog starog natjecanja koji je još davno bila pronašla. Zadatak kaže:
+
+„Zadano je N prirodnih brojeva. Koristeći zadane brojeve treba napraviti novi N-teroznamenkasti broj tako da je njegova krajnja lijeva znamenka najmanja znamenka u prvom zadanom broju, njegova druga znamenka s lijeva je najmanja znamenka u drugom zadanom broju, itd. Postupak se ponavlja sve do znamenke jedinica novog broja koja mora biti najmanja znamenka u zadnjem zadanom broju. Napiši program koji za zadane brojeve kreira i ispisuje traženi novi broj“.
+
+Ulazni podaci
+prirodan broj $N$ ( $1 \leq N \leq 6$ ), broj zadanih prirodnih brojeva;
+u sljedećih $N$ redaka se nalazi po jedan prirodan broj X ( $1 \leq X \leq 9999$), u poretku od prvog do zadnjeg zadanog broja iz zadatka.
+Izlazni podaci
+prirodan broj koji je kreiran na način opisan u zadatku. Napomena: u 50% test primjera vrijedit će da je $N=3$ i da su svi zadani brojevi troznamenkasti.
+Primjeri test podataka
+Ulaz
+Copy
+3
+325
+461
+596
+Izlaz
+Copy
+215
+Objašnjenje
+U prvom zadanom broju (325) „2“ je najmanja znamenka, u drugom broju (461) to je „1“ a u trećem (596) „5“. Zato je novo kreirani broj 215.
+*/
+
+
+
+#include <iostream>
+#include <vector>
+#include <string>
+
+int main (){
+	int size;
+	std::cin >> size;
+	std::vector <std::string> inputs;
+	std::string input;
+
+	for(int i = 0; i < size; i++){
+		std::cin>> input;
+		inputs.push_back(input);
+	}
+
+
+	int temp = 0;
+	std::vector <int> temps;
+	for(int i = 0; i < inputs.size(); i++){
+		
+		temp = inputs[i][0] - '0';	 //nacin na koji se dobije broj iz chara odnosno stringa[n], npr (char c = '9'; == int ic -'0';)
+		for(int j = 1; j < inputs[i].size(); j++){
+			if((inputs[i][j] - '0') < temp)
+				temp = inputs[i][j] - '0';
+		}
+		temps.push_back(temp);
+	}
+
+
+
+	//for petlja samo za provjeru, izbrisati kasnije
+	/*
+	int i = 0, j = 0;
+	for(i = 0; i < inputs.size(); i++){
+		for(j = 0; j < inputs[i].size(); j++){
+			std::cout << inputs[i][j] << ", ";
+		}
+		std::cout << std::endl;
+	}
+	std::cout << temp;
+	*/
+
+	int c = 0;
+	for(int i = 0; i < temps.size(); i++){
+		if(temps[i] == 0 && c == i)
+			c++;
+		else
+			std::cout << temps[i];
+	}
+}

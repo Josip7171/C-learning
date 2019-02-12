@@ -1,0 +1,54 @@
+/*
+Popularna zabavna emisija Superkuhar došla je do finalne epizode. Dvojica finalista Edi i Tin trebaju spremiti svaki po tri jela: predjelo, glavno jelo i desert. Tročlani žiri ocjenjuje svako jelo ocjenom od jedan do pet. Pobjednik je onaj koji je dobio najveći zbroj ocjena.
+
+U jednom sličnom kuharskom "showu" došlo je do problema oko proglašenja pobjednika jer su organizatori i članovi žirija bili previše zaokupljeni okusima i mirisima spremljenih delicija. Želeći izbjeći sličnu situaciju, producenti emisije su u potrazi za programom koji će nepogrešivo odrediti tko je pobjednik.
+
+Napiši program koji će za dodijeljene ocjene svakom jelu od svakog člana žirija, odrediti i ispisati ime pobjednika te ukupan zbroj ocjena pobjednika. U slučaju neriješenog rezultata treba ispisati poruku „Nema pobjednika“ i zbroj ostvarenih ocjena.
+
+Ulazni podaci
+U U šest redaka ulaza nalaze se po tri prirodna broja Oc (1≤Oc≤5), pri čeme vrijedi da su u prva tri retka zapisane ocjene koje je Edi dobio od članova žirija za svoje predjelo, glavno jelo i desert, a u preostala tri retka su odgovarajuće ocjene žirija za Tina.
+
+Izlazni podaci
+U prvi i jedini redak treba ispisati ime natjecatelja („Tin“ ili „Edi“) koji je pobijedio te ukupan zbroj ocjena za sva tri jela. U slučaju neriješenog rezultata treba ispisati poruku „Nema pobjednika“ i zbroj ostvarenih ocjena.
+
+Primjeri test podataka
+Ulaz
+Copy
+2 2 2
+3 3 3
+3 3 3
+4 4 4
+5 5 5
+3 3 3
+Izlaz
+Copy
+Tin 36
+*/
+
+#include <iostream>
+int main()
+{
+	int tin[9] = {0,0,0,0,0,0,0,0,0}, edi[9] = {0,0,0,0,0,0,0,0,0}, zbroj1 = 0, zbroj2 = 0, unos = 0, j = 0;
+	for(int i = 0; i <18; i++){
+		if(i < 9){
+			std::cin >> edi[i];
+		}
+		else if(i>= 9 && i < 18){
+			std::cin >> tin[j];
+			j++;
+		}
+	}
+	for(int i = 0; i < 9; i++){
+		zbroj1 += edi[i];
+		zbroj2 += tin[i];
+	}
+	if(zbroj1 == zbroj2){
+		std::cout << "Nema pobjednika " << zbroj1;
+	}
+	else if(zbroj1 > zbroj2){
+		std::cout <<"Edi " << zbroj1;
+	}
+	else{
+		std::cout << "Tin " << zbroj2;
+	}
+}

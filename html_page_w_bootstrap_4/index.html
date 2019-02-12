@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Body</title>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+ <script type="text/javascript">
+ 	counter = 1;
+ </script>
+
+<style>
+	h1{
+		text-align:center;
+	}
+	.slower{
+		animation-duration: 5s;
+	}
+	.ornaments{
+		width:150px;
+		height:150px;
+	}
+	#header{
+		
+		top: 0;
+		border:0;
+		display: flex;
+		justify-content:space-around;
+	}
+
+	body, html {
+	  height: 100%;
+	  margin: 0;
+	}
+
+	.bg {
+	  /* The image used */
+	  background-image: url("pine_branch.jpg");
+
+	  /* Full height */
+	  height: 100%; 
+
+	  /* Center and scale the image nicely */
+	  background-position: center;
+	  background-repeat: no-repeat;
+	  background-size: cover;
+	}
+
+
+</style>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+</head>
+<body class="bg">
+
+
+	<div id="header" class="">
+		<div class=""><a href="page1.html"><img src="red_ornament.png" class="animated infinite swing delay-0s slower ornaments" alt="red ornament" style=""></a></div>
+		<div class="" style=""><a href="page2.html"><img src="blue_ornament.png" class="animated infinite swing delay-2s slower ornaments" alt="red ornament" style=""></a></div>
+		<div class=""><a href="page3.html"><img src="green_ornament.png" class="animated infinite swing delay-1s slower ornaments" alt="red ornament" style=""></a></div>
+		<div class=""><img src="red_ornament.png" class="animated infinite swing delay-0s slower ornaments" alt="red ornament" style=""></div>
+		<div class="" style=""><img src="blue_ornament.png" class="animated infinite swing delay-2s slower ornaments" alt="red ornament" style=""></div>
+	</div>
+
+	<div id="header" style="color:white;">
+		<div style="font-weight: bold;font-family:verdana;">PAGE1</div>
+		<div style="font-weight: bold;font-family:verdana;">PAGE2</div>
+		<div style="font-weight: bold;font-family:verdana;">PAGE3</div>
+		<div style="font-weight: bold;font-family:verdana;">PAGE4</div>
+		<div style="font-weight: bold;font-family:verdana;">PAGE5</div>
+	</div>
+	
+	<br><br><br><br><br><br>
+	<h1 style="color:white; font-weight:bold; font-family:verdana;">Example Page</h1>
+
+	<div style="text-align:center;">
+		<div><button type="button" class="btn btn-success">Button</button></div>
+		<div>
+			<iframe id="id1" src="page1.html" style="background:#98bf21;height:0px;width:0px;">
+			  <p>Your browser does not support iframes.</p>
+			</iframe>
+		</div>
+	</div>
+
+	<div style=" position:fixed;bottom:0;text-align:center; background-color:darkgreen; width:100%;">
+	  <div style="color:white;">Posted by: Josip Rajković	Contact information: <a href="mailto:someone@example.com" style="color:white;">someone@example.com</a></div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+	</script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("button").click(function(){
+			 
+			if(counter %2 == 1){
+				var iframe = $("iframe");
+				
+			    iframe.animate({height: '280px', opacity: '0.4'}, "slow");
+			    iframe.animate({width: '100%', opacity: '0.8'}, "slow");
+			    counter+=1;
+			}
+			else{
+				var iframe = $("iframe");
+				iframe.animate({height: '0', opacity: '0.4'}, "slow");
+			    iframe.animate({width: '0', opacity: '0.8'}, "slow");
+				
+				
+			    counter+=1;
+			}
+		    
+		});
+	});
+	</script>
+
+</body>
+</html>

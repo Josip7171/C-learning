@@ -1,0 +1,38 @@
+/*
+Učitajte prirodan broj N i nakon toga Nbrojeva. Potrebno je izračunati njihovu sumu.
+
+Ulazni podaci
+U prvom retku ulaza nalazi se prirodni broj N
+U preostalih Nredaka nalaze se brojevi čiju sumu je potrebno izračunati.
+
+Izlazni podaci
+U jedini redak izlaza potrebno je ispisati traženi rezultat.
+
+Primjeri test podataka
+Ulaz
+Copy
+3
+4
+5
+3
+Izlaz
+Copy
+12
+Objašnjenje
+4+5+3=12
+*/
+
+#include <iostream>
+#include <iomanip>
+
+int main()
+{
+	int N = 0, M = 0, counter=0;
+	std::cin >> N;
+	for (int i = 0; i < N; i++) {
+		std::cin >> M;
+		counter +=M;
+	}
+	std::cout << counter;
+
+}

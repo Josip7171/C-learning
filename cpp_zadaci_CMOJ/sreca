@@ -1,0 +1,34 @@
+/*
+Nakon jako produktivnog sata matematike, učiteljica je odlučila bombonima nagraditi svojih N učenika. Učenici su strpljivo stali u red i čekali nagradu. Nažalost, učiteljica nije znala da prvi učenik u redu očekuje točno 1 bombon i da svaki sljedeći učenik očekuje 1 bombon više od onog učenika koji stoji prije njega u redu, pa im je bombone dijelila u proizvoljnim količinama. Primijetila je da su učenici koji su dobili strogo manje bombona nego što su očekivali bili nesretni, dok su svi ostali učenici bili sretni. Pomozite učiteljici odrediti koliko je učenika otišlo sretno s njezinog sata, kako bi sljedeći put mogla pametnije podijeliti bombone.
+
+Ulazni podaci
+U prvom retku ulaza nalazi se prirodan broj N (1 ≤ N ≤ 100). U sljedećih N redaka nalazi se po jedan cijeli broj Bi (0 ≤ Bi ≤ 100), broj bombona koje je dobio i-ti učenik.
+
+Izlazni podaci
+U prvi i jedini redak ispišite broj sretnih učenika.
+
+Primjeri test podataka
+Ulaz
+Copy
+3
+3
+2
+2
+Izlaz
+Copy
+2
+*/
+
+#include <iostream>
+int main()
+{
+	int broj_ucenika = 0, broj_bombona = 0, counter_srece = 0;
+	std::cin >> broj_ucenika;
+	for(int i = 1; i <= broj_ucenika; i++){
+		std::cin >> broj_bombona;
+		if(broj_bombona >= i)
+			counter_srece++;
+	}
+	std::cout << counter_srece;
+}
+

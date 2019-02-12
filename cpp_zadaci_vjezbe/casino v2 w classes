@@ -1,0 +1,725 @@
+// ConsoleApplication8.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include "pch.h"
+#include <iostream>
+#include <string>
+#include <ctime>
+#include <cstdlib>
+#include <fstream>
+#include <vector>
+
+
+//------------------------Klasa1-----------------------------------
+class Player {
+	std::string name;
+	int coins;
+	int multiplier;
+
+public:
+	Player();
+	~Player();
+
+	std::string getName();
+	int getCoins();
+	void gui();
+	void setCoins(int value) {
+		coins = value;
+	}
+	void print_highscore();
+	void sort_highscore();
+};
+
+Player::Player() {
+	name = "?";
+	coins = 0;
+	gui();
+	std::cout << "\n\nInput your name : ";
+	std::cin >> name;
+	std::cout << "\n\nEnter the amount you want to play with (100 - 1000)";
+	std::cout << "\nIf you enter less than 1000, your final score will be";
+	std::cout << "\nIncreased (up to 9% !)\n\n: ";
+	int input;
+	std::cin >> input;
+	if (input <= 1000 && input >= 100) {
+		coins = input;
+		multiplier = (((1000 - input) / 10000) + 1) * 2;	//Povecavanje highscorea ako se korisnik odvazio i krenuo sa cipova manje od 1000
+	}
+	else {
+		coins = 1000;
+		multiplier = 1;
+	}
+
+}
+
+Player::~Player() {
+	
+}
+
+
+void Player::sort_highscore() {
+	gui();
+	std::ifstream input("highscore.txt");
+	std::string name;
+	std::vector<std::string> names;
+	std::string temp;
+	int score = 0, int_temp = 0;
+	std::vector<std::string> scores;
+	while (input) {
+		std::getline(input, name);
+		for (int i = 0; i < name.size(); i++)
+			if (name[i] != '-')
+				temp += name[i];
+			else if (name[i] == '-') {
+				names.push_back(temp);
+				temp = "";
+				for (int j = i; j < name.size(); j++) {
+					temp += name[j];
+				}
+				i = name.size();
+				scores.push_back(temp);
+				temp = "";
+			}
+	}
+	//sortiranje highscore-a , names[i] i scores[i] se sortiraju paralelno
+	int j = 0;
+	std::string temp2;
+	for (int i = 1; i < scores.size(); i++) {
+		temp = scores[i];
+		temp2 = names[i];
+		for (j = i - 1; j >= 0 && std::stoi(scores[j]) > std::stoi(temp); j--) {
+			scores[j + 1] = scores[j];
+			names[j + 1] = name[j];
+		}
+		scores[j + 1] = temp;
+		names[j + 1] = temp2;
+	}
+
+	std::cout << "\n\nUkupno ste osvojili " << coins << " puta umnozitelj << " << multiplier << " Chipova.\n\n";
+	coins *= multiplier;
+	std::string save_data;
+	std::ofstream output;
+	output.open("highscore.txt", std::ios::out);
+	for (int i = 0; i < names.size(); i++) {
+		save_data = "\n" + names[i] + "-" + scores[i];
+		output << save_data + " \n";
+		output.flush();
+	}
+	output.close();
+
+	print_highscore();
+}
+
+void Player::print_highscore() {
+	gui();
+	sort_highscore();
+	std::vector<std::string> data;
+	std::string line;
+	std::ifstream input("highscore.txt");
+	while (input) {
+		std::getline(input, line);
+		data.push_back(line);
+	}
+
+	input.close();
+	std::cout << std::endl;
+	for (int i = 0; i < data.size() - 1; i++) {
+		std::cout << data[i] << std::endl;
+	}
+	system("PAUSE");
+}
+
+void Player::gui() {
+	system("cls");
+	std::cout << "0o---WELCOME TO THE KAZINOOOOO---o0\n";
+	std::cout << name << ", you have " << coins << " left.";
+}
+
+std::string Player::getName() {
+	return name;
+}
+
+int Player::getCoins() {
+	return coins;
+}
+
+
+//-------------------------------------------------------------------
+//------------------------Klasa2-----------------------------------
+
+class Game {
+	int give_random(int reminder = 4, int corrector = 1);
+public:
+	void game_one(Player &p1);
+	void game_two(Player &p1);
+	void game_three(Player &p1);
+	//void game_four(Player p1);
+
+	Game();
+	~Game();
+
+	char randoms_to_chars(int value);
+	void deck_converter(int &value, char &kind);
+};
+
+
+Game::~Game() {
+	std::cout << "\nGame desctructor.\n";
+}
+
+void Game::deck_converter(int &value, char &kind) {
+	int *p_value = &value;
+	char *p_kind = &kind;
+	if (value <= 13) {
+		*p_value = value;
+		*p_kind = 'H';
+	}
+	else if (value > 13 && value <= 26) {
+		*p_value = value % 13 + 1;
+		*p_kind = 'D';
+	}
+	else if (value > 26 && value <= 39) {
+		*p_value = value % 13 + 1;
+		*p_kind = 'S';
+	}
+	else if (value > 39 && value <= 51) {
+		*p_value = value % 13 + 1;
+		*p_kind = 'C';
+	}
+}
+
+char Game::randoms_to_chars(int value) {
+	switch (value) {
+	case 1:
+		return '+';
+	case 2:
+		return 'X';
+	case 3:
+		return '*';
+	case 4:
+		return '7';
+	default:
+		break;
+	}
+}
+
+int Game::give_random(int reminder, int corrector) {
+	return (std::rand() % reminder + corrector);
+}
+
+void Game::game_one(Player &p1) {
+	p1.gui();
+	int number1, number2, number3, number4, wager = 0;
+	std::cout << "\n\nOneHanded Jack!";
+	std::cout << "\nFour +'s = 1 * wager * 10 chips\nFour X's = 1 * wager * 10 chips";
+	std::cout << "\nFour *'s = 1 * wager * 10 chips\nFour 7's = 2 * wager * 777 chips!";
+	std::cout << "\nPlace your bet : ";
+	std::cin >> wager;
+	if (wager <= p1.getCoins()) {
+		p1.setCoins(p1.getCoins() - wager);
+		std::cin.ignore();
+		number1 = give_random(4, 1);
+		number2 = give_random(4, 1);
+		number3 = give_random(4, 1);
+		number4 = give_random(4, 1);
+		std::cout << "\n\n//\t" << randoms_to_chars(number1) << "\t//\t" << randoms_to_chars(number2) << "\t//\t";
+		std::cout << randoms_to_chars(number3) << "\t//\t" << randoms_to_chars(number4) << "\t//";
+
+		if (number1 == number2 && number1 == number3 && number1 == number4 && number1 != 4) {
+			std::cout << "\a\n\nWIN!\nYou got " << wager * 10 << " credits!\n\n";
+			p1.setCoins(p1.getCoins() + (wager * 10));
+		}
+		else if (number1 == number2 && number1 == number3 && number1 == number4 && number1 == 4) {
+			std::cout << "\a\n\nWIN!\nYou got " << 2 * wager * 777 << " credits!\n\n";
+			p1.setCoins(p1.getCoins() + (2*wager * 777));
+		}
+		else {
+			std::cout << "\n\nLose.\nYou lost! ";
+			std::cout << "\nChips Left : " << p1.getCoins() << ".\n\n";
+		}
+	}
+	else std::cout << "\n\nYou dont have enough chips! (" << p1.getCoins() << ")\n\n";
+	system("PAUSE");
+}
+
+void Game::game_two(Player &p1) {
+	p1.gui();
+	int wager = 0, game_runner = 1, house_number1 = 0, house_number2 = 0, given_number1 = 0, given_number2 = 0;
+	std::cout << "\n\nThrow Two Dices Game!";
+	std::cout << "\nIf WIN You Get Your Bet * 2\nIf You Get 12 You Get Your Bet * 12";
+	std::cout << "\n\nPlace Your Bet : ";
+	std::cin >> wager;
+	if (wager > p1.getCoins())
+		std::cout << "\n\nNot enough chips!";
+	else {
+		p1.setCoins(p1.getCoins() - wager);
+		house_number1 = give_random(6, 1);
+		std::cout << "\nHouse got " << house_number1 << "!\n";
+		system("PAUSE");
+		given_number1 = give_random(6, 1);
+		std::cout << "\nYou got " << given_number1 << "!\n";
+		system("PAUSE");
+		house_number2 = give_random(6, 1);
+		std::cout << "\nHouse got " << house_number2 << "!\n";
+		system("PAUSE");
+		given_number2 = give_random(6, 1);
+		std::cout << "\nYou got " << given_number2 << "!\n";
+		system("PAUSE");
+		if ((house_number1 + house_number2) < (given_number1 + given_number2))
+			if ((given_number2 + given_number1) == 12) {
+				std::cout << "\nBig Win!\nWon chips : " << wager * 12 << "!";
+				p1.setCoins(p1.getCoins() + (wager * 12));
+			}
+			else {
+				std::cout << "\n\nYou Got " << (given_number1 + given_number2) << " and House Got " << house_number1 + house_number2 << "!";
+				std::cout << "\nYou Win!\nWon chips : " << wager * 2;
+				p1.setCoins(p1.getCoins() + (wager * 2));
+			}
+		else if ((house_number1 + house_number2) > (given_number1 + given_number2)) {
+			std::cout << "\n\nYou Got " << (given_number1 + given_number2) << " and House Got " << house_number1 + house_number2 << "!";
+			std::cout << "\nYou Lose!\n";
+		}
+		else if ((house_number1 + house_number2) == given_number1 + given_number2) {
+			std::cout << "\n\nYou Got " << (given_number1 + given_number2) << " and House Got " << house_number1 + house_number2 << "!";
+			std::cout << "\nDraw!\n";
+			p1.setCoins(p1.getCoins() + wager);
+		}
+		else
+			std::cout << "\n\nWrong input!\n";
+	}
+}
+
+void Game::game_three(Player &p1) {
+	p1.gui();
+	int deck[52], random_card, random_card2;
+	char kind;
+	for (int i = 0; i < 52; i++) deck[i] = i + 1;
+	int input = 0, wager = 0;
+	std::cout << "\n\nThis Is Double Or Nothing!";
+	std::cout << "\nYou Draw One Card and House Draws One Card.\nHigher Card Wins.\nAfter Win, Chose to Go For Double Or Quit!\n\n: ";
+	std::cout << "\nInput Your Wager : ";
+	std::cin >> wager;
+	if (wager <= p1.getCoins()) {
+		p1.setCoins(p1.getCoins() - wager);
+		random_card = give_random(52, 1);
+		while (random_card == 0) random_card = give_random(52, 1);
+		deck_converter(random_card, kind);
+		std::cout << "\nYou Got " << random_card << " " << kind << ".";
+		deck[random_card] = 0;
+		system("PAUSE");
+		random_card2 = give_random(52, 1);
+		while (random_card2 == 0) random_card = give_random(52, 1);
+		deck_converter(random_card2, kind);
+		std::cout << "\nHouse Got " << random_card2 << " " << kind << ".";
+		deck[random_card2] = 0;
+		system("PAUSE");
+		while (random_card > random_card2) {
+			std::cout << "\n\nYou Win!\n";
+			wager *= 2;
+			std::cout << "\nYou Won " << wager << " chips.";
+			std::cout << "\nDouble Or Nothing? 1.YES 2.NO : ";
+			std::cin >> input;
+			if (input == 1) {
+				random_card = give_random(52, 1);
+				while (random_card == 0) random_card = give_random(52, 1);
+				deck_converter(random_card, kind);
+				std::cout << "\nYou Got " << random_card << " " << kind << ".";
+				deck[random_card] = 0;
+
+				random_card2 = give_random(52, 1);
+				while (random_card2 == 0) random_card = give_random(52, 1);
+				deck_converter(random_card2, kind);
+				std::cout << "\nHouse Got " << random_card2 << " " << kind << ".";
+				deck[random_card2] = 0;
+			}
+
+			if (input == 2) {
+				p1.setCoins(p1.getCoins() + wager);
+				wager = 0;
+				break;
+			}
+		}
+		if (random_card < random_card2) {
+			std::cout << "\n\nYou Lose!\n";
+		}
+		else if (random_card == random_card2) {
+			std::cout << "\n\nDraw.\n";
+			p1.setCoins(p1.getCoins() + wager);
+		}
+	}
+	else std::cout << "\nYou Do Not Have Enough Chips!\n";
+	system("PAUSE");
+}
+
+//void Game::game_four(Player p1) {
+//	int input = 0, wager = 0, winning_number = 0, choice = 0;
+//	bool have_won = false;
+//	std::vector<int> inputs, wagers;
+//	std::cout << "\n\nThis is Roulette!\n";
+//	std::cout << "\nYou Get Your Wager * 36 If You Guess A Number\n\n1. PLAY\n2. LEAVE\n: ";
+//	while (input <= 36 && input >= 0) {
+//		for (int i = 0; i < wagers.size(); i++) std::cout << "\nNumber - " << inputs[i] << " = " << wagers[i] << " coins.";
+//		std::cout << "\Chose a number : ";
+//		std::cin >> input;
+//		if (input <= 36 && input >= 0) {
+//			inputs.push_back(input);
+//			std::cout << "\Place your wager : ";
+//			std::cin >> wager;
+//			if (wager <= p1.getCoins() && wager > 0) {
+//				wagers.push_back(wager);
+//			}
+//			else if(wager > p1.getCoins() || wager < 0)  std::cout << "\nWrong input! (" << p1.getCoins() << ")\n";
+//			if (p1.getCoins() == 0) input = 37;
+//		}
+//	}
+//	if (inputs.size() == wagers.size()) {
+//		p1.gui();
+//		for (int i = 0; i < wagers.size(); i++) std::cout << "\nNumber - " << inputs[i] << " = " << wagers[i] << " coins.";
+//		winning_number = give_random(36, 0);
+//		std::cout << "\n\nWinning number is ----  " << winning_number << "  ----  \n\n";
+//		for (int i = 0; i < wagers.size(); i++) {
+//			if (winning_number == inputs[i]) {
+//				p1.setCoins(p1.getCoins() + (wagers[i] * 36));
+//				std::cout << "\n\nYou Won!\nWon Coins = " << wagers[i] * 36 << ".\n";
+//				have_won = true;
+//			}
+//		}
+//		if (have_won == false) std::cout << "\n\nYou Lost!\n";
+//	}
+//	else std::cout << "\nSomething went wrong.\n\n";
+//	system("PAUSE");
+//}
+
+Game::Game()
+ {
+	std::srand(time(NULL));
+}
+
+void menu() {
+	Player p1;
+	Game g1;
+	int input;
+	do {
+		p1.gui();
+		std::cout << "\n\n1.Game one\n2. Game two\n3.Game three\n4.Show Highscore\n0. Exit\n\n: ";
+		std::cin >> input;
+		switch (input) {
+		case 1:
+			g1.game_one(p1);
+			break;
+		case 2:
+			g1.game_two(p1);
+			break;
+		case 3:
+			g1.game_three(p1);
+			break;
+		case 4:
+			p1.print_highscore();
+			break;
+		default:
+			break;
+		}
+	} while (input == 1 || input == 2 || input == 3 || input == 4);
+
+	system("PAUSE");
+}
+
+//------------------------------------------------------------------------------------------------------------------
+
+//-------------------------------------CLASS 1----------------------------------------------------------------------
+class Player2 {
+	std::string name;
+	float coins;
+
+public:
+	//Player2(std::string, float);
+	Player2();					//overloading constructor, just test, it set default values to name and coins variables
+								//poziva se sa Player2 p2; ... Player2 p2(); je krivo jer je to deklaracija funkcije tipa Player2
+	std::string get_name();
+	float get_coins();
+	void set_coins(float value) { coins = value; }
+	void set_info();
+};
+
+
+Player2::Player2() {
+	name = "Robot";
+	coins = 1000;
+}
+//Player2::Player2(std::string player_name, float player_coins) : name(player_name), coins(player_coins) {}
+
+std::string Player2::get_name() {
+	return name;
+}
+
+void Player2::set_info() {
+	std::cout << "\nEnter name : ";
+	std::cin >> name;
+	coins = 1000;
+}
+
+float Player2::get_coins() {
+	return coins;
+}
+
+//-----------------------------------CLASS 2----------------------------------------------
+class Game2 {
+	Player2 p1;
+
+public:
+	Game2() { p1.set_info(); games_menu(); }
+	std::string get_player() { return p1.get_name(); }
+	float get_coins() { return p1.get_coins(); }
+
+	void games_menu();
+	void game_one(Player2 &p1);
+	void game_two(Player2 &p1);
+	void game_three(Player2 &p1);
+
+	int give_random(int reminder, int corrector);
+	char randoms_to_chars(int value);
+	void deck_converter(int &value, char &kind);
+	void gui(Player2 &p1);
+};
+
+void Game2::gui(Player2 &p1) {
+	system("cls");
+	std::cout << p1.get_name() << ", you have " << p1.get_coins() << " coins.\n\n";
+}
+
+void Game2::deck_converter(int &value, char &kind) {
+	int *p_value = &value;
+	char *p_kind = &kind;
+	if (value <= 13) {
+		*p_value = value;
+		*p_kind = 'H';
+	}
+	else if (value > 13 && value <= 26) {
+		*p_value = value % 13 + 1;
+		*p_kind = 'D';
+	}
+	else if (value > 26 && value <= 39) {
+		*p_value = value % 13 + 1;
+		*p_kind = 'S';
+	}
+	else if (value > 39 && value <= 51) {
+		*p_value = value % 13 + 1;
+		*p_kind = 'C';
+	}
+}
+
+char Game2::randoms_to_chars(int value) {
+	switch (value) {
+	case 1:
+		return '+';
+	case 2:
+		return 'X';
+	case 3:
+		return '*';
+	case 4:
+		return '7';
+	default:
+		break;
+	}
+}
+
+int Game2::give_random(int reminder, int corrector) {
+	return (std::rand() % reminder + corrector);
+}
+
+void Game2::game_one(Player2 &p1) {
+	int number1, number2, number3, number4, wager = 0;
+	std::cout << "\n\nOneHanded Jack!";
+	std::cout << "\nFour +'s = 1 * wager * 10 chips\nFour X's = 1 * wager * 10 chips";
+	std::cout << "\nFour *'s = 1 * wager * 10 chips\nFour 7's = 2 * wager * 777 chips!";
+	do {
+		gui(p1);
+		std::cout << "\nPlace your bet (0 for exit) : ";
+		std::cin >> wager;
+		if (wager <= p1.get_coins() && wager != 0) {
+			p1.set_coins(p1.get_coins() - wager);
+			std::cin.ignore();
+			number1 = give_random(4, 1);
+			number2 = give_random(4, 1);
+			number3 = give_random(4, 1);
+			number4 = give_random(4, 1);
+			std::cout << "\n\n//\t" << randoms_to_chars(number1) << "\t//\t" << randoms_to_chars(number2) << "\t//\t";
+			std::cout << randoms_to_chars(number3) << "\t//\t" << randoms_to_chars(number4) << "\t//";
+
+			if (number1 == number2 && number1 == number3 && number1 == number4 && number1 != 4) {
+				std::cout << "\a\n\nWIN!\nYou got " << wager * 10 << " credits!\n\n";
+				p1.set_coins(p1.get_coins() + (wager * 10));
+			}
+			else if (number1 == number2 && number1 == number3 && number1 == number4 && number1 == 4) {
+				std::cout << "\a\n\nWIN!\nYou got " << 2 * wager * 777 << " credits!\n\n";
+				p1.set_coins(p1.get_coins() + (2 * wager * 777));
+			}
+			else {
+				std::cout << "\n\nLose.\nYou lost! ";
+				std::cout << "\nChips Left : " << p1.get_coins() << ".\n\n";
+			}
+		}
+		else std::cout << "\n\nYou dont have enough chips! (" << p1.get_coins() << ")\n\n";
+	} while (wager != 0);
+	system("PAUSE");
+}
+
+void Game2::game_two(Player2 &p1) {
+	int wager = 0, game_runner = 1, house_number1 = 0, house_number2 = 0, given_number1 = 0, given_number2 = 0;
+	std::cout << "\n\nThrow Two Dices Game!";
+	std::cout << "\nIf WIN You Get Your Bet * 2\nIf You Get 12 You Get Your Bet * 12";
+	do {
+		gui(p1);
+		std::cout << "\n\nPlace Your Bet (0 for exit) : ";
+		std::cin >> wager;
+		if (wager > p1.get_coins())
+			std::cout << "\n\nNot enough chips!";
+		else if (wager != 0){
+			p1.set_coins(p1.get_coins() - wager);
+			house_number1 = give_random(6, 1);
+			std::cout << "\nHouse got " << house_number1 << "!\n";
+			system("PAUSE");
+			given_number1 = give_random(6, 1);
+			std::cout << "\nYou got " << given_number1 << "!\n";
+			system("PAUSE");
+			house_number2 = give_random(6, 1);
+			std::cout << "\nHouse got " << house_number2 << "!\n";
+			system("PAUSE");
+			given_number2 = give_random(6, 1);
+			std::cout << "\nYou got " << given_number2 << "!\n";
+			system("PAUSE");
+			if ((house_number1 + house_number2) < (given_number1 + given_number2))
+				if ((given_number2 + given_number1) == 12) {
+					std::cout << "\nBig Win!\nWon chips : " << wager * 12 << "!";
+					p1.set_coins(p1.get_coins() + (wager * 12));
+				}
+				else {
+					std::cout << "\n\nYou Got " << (given_number1 + given_number2) << " and House Got " << house_number1 + house_number2 << "!";
+					std::cout << "\nYou Win!\nWon chips : " << wager * 2;
+					p1.set_coins(p1.get_coins() + (wager * 2));
+				}
+			else if ((house_number1 + house_number2) > (given_number1 + given_number2)) {
+				std::cout << "\n\nYou Got " << (given_number1 + given_number2) << " and House Got " << house_number1 + house_number2 << "!";
+				std::cout << "\nYou Lose!\n";
+			}
+			else if ((house_number1 + house_number2) == given_number1 + given_number2) {
+				std::cout << "\n\nYou Got " << (given_number1 + given_number2) << " and House Got " << house_number1 + house_number2 << "!";
+				std::cout << "\nDraw!\n";
+				p1.set_coins(p1.get_coins() + wager);
+			}
+			else
+				std::cout << "\n\nWrong input!\n";
+		}
+		system("PASUE");
+	} while (wager != 0);
+}
+
+void Game2::game_three(Player2 &p1) {
+	int deck[52], random_card, random_card2;
+	char kind;
+	for (int i = 0; i < 52; i++) deck[i] = i + 1;
+	int input = 0, wager = 0;
+	std::cout << "\n\nThis Is Double Or Nothing!";
+	std::cout << "\nYou Draw One Card and House Draws One Card.\nHigher Card Wins.\nAfter Win, Chose to Go For Double Or Quit!\n\n: ";
+	do {
+		gui(p1);
+		std::cout << "\nInput Your Wager : ";
+		std::cin >> wager;
+		if (wager <= p1.get_coins() && wager != 0) {
+			p1.set_coins(p1.get_coins() - wager);
+			random_card = give_random(52, 1);
+			while (random_card == 0) random_card = give_random(52, 1);
+			deck_converter(random_card, kind);
+			std::cout << "\nYou Got " << random_card << " " << kind << ".";
+			deck[random_card] = 0;
+			system("PAUSE");
+			random_card2 = give_random(52, 1);
+			while (random_card2 == 0) random_card = give_random(52, 1);
+			deck_converter(random_card2, kind);
+			std::cout << "\nHouse Got " << random_card2 << " " << kind << ".";
+			deck[random_card2] = 0;
+			system("PAUSE");
+			while (random_card > random_card2) {
+				std::cout << "\n\nYou Win!\n";
+				wager *= 2;
+				std::cout << "\nYou Won " << wager << " chips.";
+				std::cout << "\nDouble Or Nothing? 1.YES 2.NO : ";
+				std::cin >> input;
+				if (input == 1) {
+					random_card = give_random(52, 1);
+					while (random_card == 0) random_card = give_random(52, 1);
+					deck_converter(random_card, kind);
+					std::cout << "\nYou Got " << random_card << " " << kind << ".";
+					deck[random_card] = 0;
+
+					random_card2 = give_random(52, 1);
+					while (random_card2 == 0) random_card = give_random(52, 1);
+					deck_converter(random_card2, kind);
+					std::cout << "\nHouse Got " << random_card2 << " " << kind << ".";
+					deck[random_card2] = 0;
+				}
+
+				if (input == 2) {
+					p1.set_coins(p1.get_coins() + wager);
+					wager = 0;
+					break;
+				}
+			}
+			if (random_card < random_card2) {
+				std::cout << "\n\nYou Lose!\n";
+			}
+			else if (random_card == random_card2) {
+				std::cout << "\n\nDraw.\n";
+				p1.set_coins(p1.get_coins() + wager);
+			}
+		}
+		else std::cout << "\nYou Do Not Have Enough Chips!\n";
+		system("PAUSE");
+	} while (wager != 0);
+}
+
+void Game2::games_menu() {
+	int input = 0;
+	do {
+		gui(p1);
+		std::cout << "\n\n\nTake a pick\n\n1.Game one\n2.Game two\n3.Game three\n4.Show highscore\n5.Leave\n\n: ";
+		std::cin >> input;
+		switch (input) {
+		case 1:
+			game_one(p1);
+			break;
+		case 2:
+			game_two(p1);
+			break;
+		case 3:
+			game_three(p1);
+			break;
+		case 4:
+			break;
+		case 5:
+			break;
+		default:
+			break;
+		}
+	} while (input != 5);
+}
+
+
+
+//-----------------------------------------------------------------------------------------------------------------------
+
+int main() {
+	//menu();
+
+	Game2 game_session;						//ovo se moze i pozvati uniform initializationom : Player2 p1 (player_name, player_coins);
+											// ili cak Player2 p1 = {player_name, player_coins};
+
+	std::cout << "\n\nHi " << game_session.get_player() << ", you have " << game_session.get_coins() << " coins. \n";
+}
+
+
+
+
+
+
+

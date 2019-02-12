@@ -1,0 +1,63 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <vector>
+#include <ctime>
+#include <cstdlib>
+
+void unos();
+void ispis();
+
+
+int main()
+{
+	int x = 1;
+	do {
+		std::cout << std::endl;
+		std::cout << "1. za igru\n0. za izlaz\n: ";
+		std::cin >> x;
+		switch (x) {
+		case 1:
+			unos();
+			ispis();
+			break;
+		case 0:
+			break;
+		}
+	} while (x != 0);
+}
+
+void unos() {
+	system("cls");
+	std::srand(time(NULL));
+	int unos = 0, random_number1 = (std::rand() % 6) + 1;
+	int random_number2 = (std::rand() % 6) + 1;
+	std::string ime, za_spremanje;
+
+	std::cin.ignore();
+	
+	std::cout << "\n -- " << random_number1 << " -- " << random_number2 <<" -- !";
+	std::cout << "\nUnesite ime : ";
+	std::getline(std::cin, ime);
+	//std::cin.ignore();
+	za_spremanje = "\n" + ime + " - " + std::to_string(random_number1+random_number2);
+	std::ofstream output;
+	output.open("zadatak2.txt", std::ios::out | std::ios::app );
+	output << za_spremanje;
+	output.close();
+}
+
+void ispis() {
+	std::vector<std::string> podaci;
+	std::ifstream input("zadatak2.txt");
+	std::string line;
+	while (input) {
+		std::getline(input, line);
+		podaci.push_back(line);
+	}
+	input.close();
+	
+	for (int i = 0; i < podaci.size() - 1; i++) {
+		std::cout << podaci[i] << std::endl;
+	}
+}

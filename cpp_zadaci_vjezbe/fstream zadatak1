@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <vector>
+
+void unos();
+void ispis();
+
+
+int main()
+{
+	unos();
+	ispis();
+}
+
+void unos() {
+	std::cout << "Hello World!\n";
+	int unos = 0;
+	std::cout << "\nUnesite broj do kojeg da vrti program : ";
+	std::cin >> unos;
+	std::cin.ignore();
+	std::ofstream output;
+	output.open("primjer.txt", std::ios::out);
+	for (int i = 0; i < unos; i++) {
+		output << i<<"\t";
+	}
+	output.close();
+}
+
+void ispis() {
+	std::vector<std::string> podaci;
+	std::ifstream input("primjer.txt");
+	std::string line;
+	while (input) {
+		std::getline(input, line);
+		podaci.push_back(line);
+	}
+	input.close();
+	
+	for (int i = 0; i < podaci.size() - 1; i++) {
+		std::cout << podaci[i] << std::endl;
+	}
+}

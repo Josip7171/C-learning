@@ -1,0 +1,83 @@
+/*
+Razredbeni klobuk (eng. Sorting Hat) je čarobni šešir koji nepogrješivo raspoređuje učenike Hogwartsa (čuvene čarobnjačke škole) u jedan od četiri doma unutar škole. U slobodno vrijeme pomaže Harryju i Hermioni u igranju igre „Sastavi prirodan broj“.
+
+U klobuku se nalazi beskonačno mnogo znamenki 0, 1, 2, 3, 4, 5, 6, 7, 8 i 9. Igra „Sastavi prirodan broj“ se igra tako da prvo klobuk igraču kaže jedan prirodan broj a onda igrač iz klobuka izvlači toliki broj znamenki jednu po jednu. Od izvučenih znamenki igrač sastavlja prirodan broj.
+
+Prva izvučena znamenka iz klobuka postaje prva znamenka (ili krajnja lijeva) u našem broju, druga izvučena znamenka postaje druga znamenka broja, itd. Zadnja izvučena znamenka postaje znamenka jedinica u broju. Igrač počinje sastavljati broj s prvom izvučenom znamenkom različitom od nule. Npr. ako smo redom izvukli znamenke 7, 3, 7 i 1 tada je broj koji smo sastavili 7371, ali ako smo redom izvukli znamenke 0, 0, 3, 5, 7 tada je sastavljeni broj 357.
+
+Harry uvijek igra prvi, a nakon što se klobuk resetira, igru odigra i Hermiona. Napiši program koji će ispisivati brojeve koje su sastavili Harry i Hermiona, tko je od njih dvoje sastavio veći broj i kolika je razlika između većeg i manjeg sastavljenog broja.
+
+Ulazni podaci
+prirodan broj N (1≤N≤9), broj koji je klobuk rekao Harryju;
+prirodan broj M (1≤M≤9), broj koji je klobuk rekao Hermioni;
+niz od N jednoznamenkastih brojeva Xi (0≤Xi≤9), znamenke onim redom kojim ih je Harry izvlačio iz klobuka;
+niz od M jednoznamenkastih brojeva Yi (0≤Yi≤9), znamenke onim redom kojim ih je Hermiona izvlačila iz klobuka;
+Izlazni podaci
+tekst 'HARRY:' i prirodan broj koji je sastavio Harry;
+tekst 'HERMIONA:' i prirodan broj koji je sastavila Hermiona;
+tekst 'HARRY' ili 'HERMIONA' ili 'JEDNAKO' (ime igrača koji je sastavio veći broj) te prirodan broj koji predstavlja razliku između većeg i manjeg sastavljenog broja (ili 0);
+Primjeri test podataka
+Ulaz
+Copy
+3
+3
+7
+4
+6
+2
+5
+9
+Izlaz
+Copy
+HARRY:746
+HERMIONA:259
+HARRY 487
+Objašnjenje
+Klobuk je Harryju i Hermioni rekao broj 3. Harry je onda redom izvukao znamenke 7, 4 i 6 te je od tih znamenki sastavio broj 746. Hermiona je onda redom izvukla znamenke 2, 5 i 9. Od tih znamenki je sastavila broj 259. Veći broj je sastavio Harry, a razlika brojeva je bila 746-259=487.
+*/
+
+
+
+#include <iostream>
+#include <math.h>
+int main() {
+	int harry_n = 0, hermi_n = 0, total_herry = 0, total_hermi = 0;
+	std::cin >> harry_n >> hermi_n;
+	int *array1 = new int[harry_n];
+	int *array2 = new int[hermi_n];
+	for (int i = 0; i < harry_n; i++) {
+		std::cin >> array1[i];
+	}
+	for (int i = 0; i < hermi_n; i++) {
+		std::cin >> array2[i];
+	}
+
+	int j = harry_n - 1;
+	for (int i = 0; i < harry_n; i++) {
+		total_herry += (array1[i] * pow(10, j));
+		j--;
+	}
+
+	j = hermi_n - 1;
+	for (int i = 0; i < hermi_n; i++) {
+		total_hermi += (array2[i] * pow(10, j));
+		j--;
+	}
+
+	if (total_hermi > total_herry) {
+		std::cout << "HARRY:" << total_herry << std::endl;
+		std::cout << "HERMIONA:" << total_hermi << std::endl;
+		std::cout << "HERMIONA " << total_hermi - total_herry;
+	}
+	else if (total_hermi < total_herry) {
+		std::cout << "HARRY:" << total_herry << std::endl;
+		std::cout << "HERMIONA:" << total_hermi << std::endl;
+		std::cout << "HARRY " << total_herry - total_hermi;
+	}
+	else {
+		std::cout << "HARRY:" << total_herry << std::endl;
+		std::cout << "HERMIONA:" << total_hermi << std::endl;
+		std::cout << "JEDNAKO 0"; //<< total_herry - total_hermi;
+	}
+
+}

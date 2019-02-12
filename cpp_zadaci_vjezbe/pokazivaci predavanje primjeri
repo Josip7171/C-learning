@@ -1,0 +1,22 @@
+#include <iostream>
+
+int main()
+{
+	int a = 7;
+	std::cout << &a << std::endl;
+
+	int *p_a = nullptr;
+	p_a = &a;				// p_a pokazuje na adresu od a
+	std::cout << "a = " << a << std::endl;				//ispise vrijednost
+	std::cout << "p_a = " << p_a << std::endl;			//ispise adresu
+	std::cout << "&a = " << &a << std::endl;			//ispise adresu
+	std::cout << "*p_a = " << *p_a << std::endl;		//ispise vrijednost
+	std::cout << "&p_a = " << &p_a << std::endl;		//i pointer ima svoju adresu!
+
+	int *p_b = new int;		//rezerviraj memoriju za 1 integer na hip memoriji (stack memorija je ona koja se koristi, hip je slobodna)
+	*p_b = 10;			//na lokaciju na koju pokazuje pointer spremi 10
+	std::cout << "\nNa adresi " << p_b << " upisana je vrijednost " << *p_b << std::endl;
+	delete p_b;		// izbrisi lokaciju na koju je pointer pokazivao
+	p_b = nullptr;	//daj novu adresu pointeru da se ne dogodi greska
+
+}

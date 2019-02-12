@@ -1,0 +1,68 @@
+/*
+Mirku je brzo dojadio Jetpack Joyride pa je na svom mobitelu počeo igrati Pokémon GO! Jedna od zanimljivosti ove igre je i tzv. evoluiranje Pokémona.
+
+Kako bi evoluirao Pokémona vrste Pi , Mirko mora dati Ki slatkiša predviđenih za Pokémona te vrste. Nakon evolucije tog Pokémona, on dobije natrag 2 slatkiša koja je dao. Pokémoni određene vrste mogu se evoluirati samo sa slatkišima za njegovu vrstu.
+
+Mirko ima N vrsta Pokémona i Mi slatkiša za vrstu Pokémona Pi i zanima ga koliko ukupno Pokémona može evoluirati.
+
+Zanima ga i kojeg Pokémona može najviše puta evoluirati. Ako postoji više takvih Pokémona, ispišite onog s najmanjim Pokédex brojem, tj. onog koji se pojavljuje prije u ulaznim podacima.
+
+Ulazni podaci
+U prvom retku ulaza nalazi se prirodan broj N (1 ≤ N ≤ 70), broj vrsta Pokémona.
+
+U sljedećih 2N redaka nalazi se N skupova podataka, pri čemu vrijedi:
+
+u retku 2i nalazi se string Pi duljine najviše 20 znakova, ime i-te vrste Pokémona;
+u retku 2i+1 nalaze se brojevi Ki (12 ≤ Ki ≤ 400) i Mi (1 ≤ Mi ≤ 104 ), broj slatkiša potrebnih za evoluciju jednog Pokémona i-te vrste i ukupan broj slatkiša za Pokémone i-te vrste koje Mirko posjeduje.
+Izlazni podaci
+U prvi redak izlaza potrebno je ispisati ukupan broj Pokémona koje Mirko može evoluirati.
+
+U drugi redak izlaza potrebno je ispisati ime Pokémona kojeg može najviše puta evoluirati.
+
+Ulaz
+Copy
+4
+Caterpie
+12 33
+Weedle
+12 42
+Pidgey
+12 47
+Rattata
+25 71
+Izlaz
+Copy
+14
+Weedle
+*/
+
+
+#include<iostream>
+#include<string>
+#include<vector>
+int main(){
+	int broj_vrsta = 0, slatkisa_potrebno = 0, slatkisa_ima = 0, lokator = 0, counter = 0, counter2 = 0, trenutni_vodeci = 0;
+	std::string naziv;
+	std::vector<std::string>nazivi;
+	std::cin>>broj_vrsta;
+	for(int i = 0; i < broj_vrsta; i++){
+		std::cin >> naziv;
+		nazivi.push_back(naziv);
+		std::cin>>slatkisa_potrebno >> slatkisa_ima;
+
+		//counter evoluiranih pokemona
+		while((slatkisa_ima-slatkisa_potrebno) >= 0){
+			slatkisa_ima= (slatkisa_ima - slatkisa_potrebno)+2;
+			counter++;
+			counter2++;
+		}
+		if(counter2 > trenutni_vodeci){
+			trenutni_vodeci = counter2;
+			lokator = i;
+		}
+		counter2 = 0;
+	}
+	std::cout << counter << std::endl << nazivi[lokator];
+}
+
+
